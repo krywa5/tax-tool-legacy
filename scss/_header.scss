@@ -1,0 +1,17 @@
+.header {
+    background-color: darken($primary-color, 30%);
+    text-align: center;
+    flex: 0 0 100px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    h1 { 
+        font-family: 'Montserrat', sans-serif;
+        text-shadow: 0 0 8px black;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 10px;
+        font-size: 46px;
+        line-height: 100px;
+        cursor: default;
+    }
+}

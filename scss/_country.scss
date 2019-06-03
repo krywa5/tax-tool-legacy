@@ -1,0 +1,15 @@
+.country-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: darken($primary-color, 15%);
+    flex: 0 0 75px;
+    width: 100%;
+    font-size: 20px;
+
+    select {
+        font-size: inherit;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+}
