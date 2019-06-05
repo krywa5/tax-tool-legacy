@@ -1,13 +1,14 @@
 body {
     background-image: url(../images/art-background-blank-1020317.jpg);
-    background-size: cover;
+    // width: 100vw;
+    // background-size: cover;  
 }
 
 .wrapper {
     display: flex;
     flex-direction: column;
     // align-items: center;
-    height: 800px;
+    // height: 800px;
     width: 500px;
     background-color: $primary-color;
     border-radius: 10px;
@@ -20,5 +21,5 @@ input, select {
 }
 
 *::selection {
-    background-color: rgb(250, 204, 0);
+    background-color: $secondary-color;
 }

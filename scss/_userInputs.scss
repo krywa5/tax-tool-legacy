@@ -1,0 +1,79 @@
+.input-box {
+    display: flex;
+    flex-direction: column;
+
+    .userInfo {
+        text-align: center;
+        font-size: 20px;
+        padding: 10px;
+        background-color: darken($primary-color, 15%);
+        border-bottom: 1px solid black;
+
+        .bottomNote {
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            background-color: $secondary-color;
+            letter-spacing: 2px;
+        }
+    }
+
+
+    
+    &-inputs {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid black;
+        font-size: 20px;
+        // text-align: right;
+
+        span {
+            font-size: 14px;
+        }
+
+        input {
+            margin-left: 10px;
+            font-size: 22px;
+            width: 150px;
+            height: 50px;
+            text-align: right;
+            padding: 0 3px;
+        }
+
+        input[type="date"] {
+            font-size: 16px;
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        input[type="date"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            display: none;
+        }
+    }
+    // &-inputs:last-child {
+    //     border-bottom: none;
+    // }
+
+    .results {
+        border: none;
+        font-size: 26px;
+
+        span {
+            font-size: 12px;
+            color: red;
+        }
+
+        input {
+            background-color: $secondary-color;
+            border: 2px solid black;
+        }
+        input::selection {
+            background-color: darken($primary-color, 15%);
+        }
+        
+    }
+
+}

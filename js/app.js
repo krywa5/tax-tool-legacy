@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Country from './components/Country';
 import Header from './components/Header';
+import Main from './components/Main';
 
 class App extends Component {
     state = {
@@ -11,7 +12,7 @@ class App extends Component {
     };
 
     handleCountryChoice = (country) => {
-        console.log(country);
+        // console.log(country);
         if (country !== '') {
             this.setState({
                 country,
@@ -23,9 +24,6 @@ class App extends Component {
                 isCountryChosen: false
             })
         }
-
-
-
     }
 
     render() {
@@ -34,6 +32,7 @@ class App extends Component {
             <div className="wrapper">
                 <Header />
                 <Country onClick={this.handleCountryChoice} />
+                {this.state.isCountryChosen && <Main countryData={this.state.country} />}
             </div>
         );
     }
