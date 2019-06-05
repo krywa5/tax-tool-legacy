@@ -10,18 +10,20 @@ const Main = (props) => {
         income: "Total brut",
         paymentDay: "Paye Le"
     };
-    const belgium = {
-        income: "Loon loonbelasting/volksverzekeringen",
-        tax: "Ingehouden loonbelasting/premie volksverz. (loonheffing)"
-    };
     const germany = {
         income: "Gesamt-Brutto"
     };
 
-
-    return (
-        <Netherlands />
-    );
+    switch (props.countryData) {
+        case 'netherlands':
+            return <Netherlands />;
+        case 'belgium':
+            return <Belgium />;
+        case 'france':
+            return <France />;
+        case 'germany':
+            return <Germany />;
+    }
 }
 
 export default Main;

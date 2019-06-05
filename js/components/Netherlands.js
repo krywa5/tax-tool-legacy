@@ -66,7 +66,7 @@ class Netherlands extends Component {
                 currencyValueDate: data.rates[0].effectiveDate,
                 currencyTable: data.rates[0].no
             }))
-            .catch(error => console.log(error))
+            .catch(error => alert(error))
     }
 
 
