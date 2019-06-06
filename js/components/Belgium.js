@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Belgium extends Component {
     state = {
         allowanceValue: 14.4, // to można edytować
-        dailyIncomeCost: 111.25, // to można edytować
+        monthlyIncomeCost: 111.25, // to można edytować
         income: '',
         tax: '',
         currencyValue: '',
@@ -62,11 +62,12 @@ class Belgium extends Component {
         fetch(API_URL)
             .then(response => response.json())
             .then(data => this.setState({
-                currencyValue: data.rates[0].mid,
+                currencyValue: data.rates[0].mid.toFixed(4),
                 currencyValueDate: data.rates[0].effectiveDate,
                 currencyTable: data.rates[0].no
             }))
-            .catch(error => alert(error))
+            // w wersji finalnej można dać tutaj alert
+            .catch(error => console.log(error))
     }
 
 
@@ -99,9 +100,9 @@ class Belgium extends Component {
         return oldDate.toString().split("-").reverse().join("-");
     }
 
-    onCurrencyInputChange = (e) => {
+    currencyValueChangeHandler = (e) => {
         this.setState({
-            currencyValue: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -163,7 +164,7 @@ class Belgium extends Component {
                         value={this.state.endDate}
                         name="endDate"
                         onChange={this.dateInputHandler}
-                        min="2000-01-02"
+                        max={new Date().toISOString().slice(0, 10)}
                     />
                 </div>
                 <div className="input-box-inputs">
@@ -188,17 +189,21 @@ class Belgium extends Component {
                         type="number"
                         id="currencyValue"
                         value={this.state.currencyValue ? this.state.currencyValue : ""}
-                        readOnly
-                    // onChange={this.onCurrencyInputChange()}
+                        onChange={this.currencyValueChangeHandler}
+                        step="0.0001"
+                        name="currencyValue"
+                        min="0"
                     />
                 </div>
                 <div className="input-box-inputs">
-                    <label htmlFor="allowanceMonths">Ilość miesięcy, za które przysługują diety</label>
+                    <label htmlFor="allowanceMonths">Ilość miesięcy zagranicą</label>
                     <input
                         type="number"
                         id="allowanceMonths"
                         value={this.state.workMonths}
-                        readOnly
+                        onChange={this.inputHandler}
+                        name="workMonths"
+                        min="0"
                     />
                 </div>
                 <div className="input-box-inputs">
@@ -207,16 +212,21 @@ class Belgium extends Component {
                         type="number"
                         id="allowanceValue"
                         value={this.state.allowanceValue}
-                        readOnly
+                        onChange={this.inputHandler}
+                        name="allowanceValue"
+                        min="0"
+                        step="0.1"
                     />
                 </div>
                 <div className="input-box-inputs">
                     <label htmlFor="workDays">Ilość dni zagranicą</label>
                     <input
                         type="number"
-                        readOnly
                         id="workDays"
                         value={this.state.workDays}
+                        onChange={this.inputHandler}
+                        name="workDays"
+                        min="0"
                     />
                 </div>
                 <div className="input-box-inputs">
@@ -229,7 +239,7 @@ class Belgium extends Component {
                     />
                 </div>
                 <div className="input-box-inputs results">
-                    <label htmlFor="taxValue">Wartość podatku (PLN)<br /><span>pole nr 204 oraz PIT-ZG pole nr 10</span></label>
+                    <label htmlFor="taxValue">Wartość podatku (PLN)<br /><span><strong>pole nr 204</strong> oraz <strong>PIT-ZG pole nr 10</strong></span></label>
                     <input
                         type="number"
                         readOnly
@@ -237,12 +247,12 @@ class Belgium extends Component {
                         value={this.state.currencyValue ? (this.state.tax * this.state.currencyValue).toFixed(2) : ''} />
                 </div>
                 <div className="input-box-inputs results">
-                    <label htmlFor="allIncomeValue">Wartość przychodu (PLN)<br /><span>pole nr 43 oraz PIT-ZG pole nr 9</span><br /><span>w polu PIT-ZG pole nr 8 = 0</span></label>
+                    <label htmlFor="allIncomeValue">Wartość przychodu (PLN)<br /><span><strong>pole nr 43</strong> oraz <strong>PIT-ZG pole nr 9</strong><br />w polu PIT-ZG pole nr 8 = 0</span></label>
                     <input
                         type="number"
                         readOnly
                         id="allIncomeValue"
-                        value={this.state.currencyValue ? ((this.state.income - this.state.workDays * this.state.allowanceValue) * this.state.currencyValue - (this.state.workMonths * this.state.dailyIncomeCost)).toFixed(2) : ''}
+                        value={this.state.currencyValue ? ((this.state.income - this.state.workDays * this.state.allowanceValue) * this.state.currencyValue - (this.state.workMonths * this.state.monthlyIncomeCost)).toFixed(2) : ''}
                     />
                 </div>
                 <div className="userInfo" style={{ borderBottom: 'none', borderRadius: '0 0 10px 10px' }}><span className="bottomNote">Sprawdzić ulgę abolicyjną!</span></div>

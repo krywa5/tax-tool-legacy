@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Country from './components/Country';
 import Header from './components/Header';
 import Main from './components/Main';
+import Footer from './components/Footer';
 
 class App extends Component {
     state = {
@@ -29,11 +30,14 @@ class App extends Component {
     render() {
 
         return (
-            <div className="wrapper">
-                <Header />
-                <Country onClick={this.handleCountryChoice} />
-                {this.state.isCountryChosen && <Main countryData={this.state.country} />}
-            </div>
+            <>
+                <div className="wrapper">
+                    <Header />
+                    <Country onClick={this.handleCountryChoice} />
+                    {this.state.isCountryChosen && <Main countryData={this.state.country} />}
+                </div>
+                <Footer />
+            </>
         );
     }
 }
