@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, {
+    Component
+} from 'react';
 
 class Germany extends Component {
     state = {
@@ -39,19 +41,19 @@ class Germany extends Component {
         let newDate = new Date(date);
         newDate.setDate(newDate.getDate() - 1);
         // console.log(newDate);
-        !(newDate.getDay() % 6) ? output = true : output = false;
+        !(newDate.getDay() % 6) ? output = true: output = false;
         // console.log(`Pierwsza iteracja ${output}`);
         if (output === true) {
             newDate.setDate(newDate.getDate() - 1);
         }
         // console.log(newDate);
-        !(newDate.getDay() % 6) ? output = true : output = false;
+        !(newDate.getDay() % 6) ? output = true: output = false;
         // console.log(`Druga iteracja ${output}`);
         if (output === true) {
             newDate.setDate(newDate.getDate() - 1);
         }
         // console.log(newDate);
-        !(newDate.getDay() % 6) ? output = true : output = false;
+        !(newDate.getDay() % 6) ? output = true: output = false;
         // console.log(`Trzecia iteracja ${output}`);
         // console.log(`ostateczna data: ${newDate}`);
         return newDate.toISOString().slice(0, 10)
@@ -66,8 +68,10 @@ class Germany extends Component {
                 currencyValueDate: data.rates[0].effectiveDate,
                 currencyTable: data.rates[0].no
             }))
-            // w wersji finalnej można dać tutaj alert
-            .catch(error => console.log(error))
+            .catch(error => {
+                alert("Błąd pobierania danych z serwera NBP. Szczegóły w consoli.");
+                console.log(error);
+            })
     }
 
 
@@ -121,134 +125,210 @@ class Germany extends Component {
             holidayIncome: "Pole nr 20 - Steuefreue…"
         };
 
-        return (
-            <div className="input-box">
-                <div className="input-box-inputs">
-                    <label htmlFor="income">Przychód brutto (EUR)<br /><span>{germany.income}</span></label>
-                    <input
-                        value={this.state.income}
-                        name='income'
-                        onChange={this.inputHandler}
-                        type="number"
-                        id="income"
-                        min="0"
-                    />
-                </div>
-                <div className="input-box-inputs">
-                    <label htmlFor="holidayIncome">Przychód wakacyjny (EUR)<br /><span>{germany.holidayIncome}</span></label>
-                    <input
-                        value={this.state.holidayIncome}
-                        name='holidayIncome'
-                        onChange={this.inputHandler}
-                        type="number"
-                        id="holidayIncome"
-                        min="0"
-                    />
-                </div>
-                <div className="input-box-inputs">
-                    <label htmlFor="startDate">Data rozpoczęcia pracy</label>
-                    <input
-                        type="date"
-                        id="startDate"
-                        value={this.state.startDate}
-                        name="startDate"
-                        onChange={this.dateInputHandler}
-                    />
-                </div>
-                <div className="input-box-inputs">
-                    <label htmlFor="endDate">Data zakończenia pracy</label>
-                    <input
-                        type="date"
-                        id="endDate"
-                        value={this.state.endDate}
-                        name="endDate"
-                        onChange={this.dateInputHandler}
-                        max={new Date().toISOString().slice(0, 10)}
-                    />
-                </div>
-                <div className="input-box-inputs">
-                    <label htmlFor="daysInPoland">Dni spędzone w Polsce</label>
-                    <input
-                        type="number"
-                        id="daysInPoland"
-                        value={this.state.daysInPoland}
-                        name="daysInPoland"
-                        onChange={this.inputHandler}
-                        min='0'
-                    />
-                </div>
-                <div className="userInfo">Wartości poniżej są obliczane automatycznie</div>
+        return ( <
+            div className = "input-box" >
+            <
+            div className = "input-box-inputs" >
+            <
+            label htmlFor = "income" > Przychód brutto(EUR) < br / > < span > {
+                germany.income
+            } < /span></label >
+            <
+            input value = {
+                this.state.income
+            }
+            name = 'income'
+            onChange = {
+                this.inputHandler
+            }
+            type = "number"
+            id = "income"
+            min = "0" /
+            >
+            <
+            /div> <
+            div className = "input-box-inputs" >
+            <
+            label htmlFor = "holidayIncome" > Przychód wakacyjny(EUR) < br / > < span > {
+                germany.holidayIncome
+            } < /span></label >
+            <
+            input value = {
+                this.state.holidayIncome
+            }
+            name = 'holidayIncome'
+            onChange = {
+                this.inputHandler
+            }
+            type = "number"
+            id = "holidayIncome"
+            min = "0" /
+            >
+            <
+            /div> <
+            div className = "input-box-inputs" >
+            <
+            label htmlFor = "startDate" > Data rozpoczęcia pracy < /label> <
+            input type = "date"
+            id = "startDate"
+            value = {
+                this.state.startDate
+            }
+            name = "startDate"
+            onChange = {
+                this.dateInputHandler
+            }
+            /> < /
+            div > <
+            div className = "input-box-inputs" >
+            <
+            label htmlFor = "endDate" > Data zakończenia pracy < /label> <
+            input type = "date"
+            id = "endDate"
+            value = {
+                this.state.endDate
+            }
+            name = "endDate"
+            onChange = {
+                this.dateInputHandler
+            }
+            max = {
+                new Date().toISOString().slice(0, 10)
+            }
+            /> < /
+            div > <
+            div className = "input-box-inputs" >
+            <
+            label htmlFor = "daysInPoland" > Dni spędzone w Polsce < /label> <
+            input type = "number"
+            id = "daysInPoland"
+            value = {
+                this.state.daysInPoland
+            }
+            name = "daysInPoland"
+            onChange = {
+                this.inputHandler
+            }
+            min = '0' /
+            >
+            <
+            /div> <
+            div className = "userInfo" > Wartości poniżej są obliczane automatycznie < /div>
 
-                {/* INPUTY WYPEŁNIANE AUTOMATYCZNIE */}
+            {
+                /* INPUTY WYPEŁNIANE AUTOMATYCZNIE */
+            }
 
 
-                <div className="input-box-inputs">
-                    <label htmlFor="currencyValue">Średni kurs waluty<br />{this.state.currencyValueDate && <span style={{ fontSize: '12px' }}>{`(${this.changeFormateDate(this.state.currencyValueDate)}, ${this.state.currencyTable})`}</span>}</label>
-                    <input
-                        type="number"
-                        id="currencyValue"
-                        value={this.state.currencyValue ? this.state.currencyValue : ""}
-                        onChange={this.currencyValueChangeHandler}
-                        step="0.0001"
-                        name="currencyValue"
-                        min="0"
-                    />
-                </div>
-                <div className="input-box-inputs">
-                    <label htmlFor="allowanceMonths">Ilość miesięcy zagranicą</label>
-                    <input
-                        type="number"
-                        id="allowanceMonths"
-                        value={this.state.workMonths}
-                        onChange={this.inputHandler}
-                        name="workMonths"
-                        min="0"
-                    />
-                </div>
-                <div className="input-box-inputs">
-                    <label htmlFor="allowanceValue">Wysokość diety za dzień (EUR)</label>
-                    <input
-                        type="number"
-                        id="allowanceValue"
-                        value={this.state.allowanceValue}
-                        onChange={this.inputHandler}
-                        name="allowanceValue"
-                        min="0"
-                        step="0.1"
-                    />
-                </div>
-                <div className="input-box-inputs">
-                    <label htmlFor="workDays">Ilość dni zagranicą</label>
-                    <input
-                        type="number"
-                        id="workDays"
-                        value={this.state.workDays}
-                        onChange={this.inputHandler}
-                        name="workDays"
-                        min="0"
-                    />
-                </div>
-                <div className="input-box-inputs">
-                    <label htmlFor="allAllowanceValue">Wartość diet (EUR)</label>
-                    <input
-                        readOnly
-                        type="number"
-                        id="allAllowanceValue"
-                        value={this.state.workDays ? (this.state.workDays * this.state.allowanceValue).toFixed(2) : ''}
-                    />
-                </div>
-                <div className="input-box-inputs results">
-                    <label htmlFor="allIncomeValue">Wartość przychodu (PLN)<br /><span><strong>PIT-ZG pole nr 8</strong><br />PIT-ZG pole nr 9,10 = 0, sprawdzić pole nr 199</span></label>
-                    <input
-                        type="number"
-                        readOnly
-                        id="allIncomeValue"
-                        value={this.state.currencyValue ? ((this.state.income + this.state.holidayIncome - this.state.workDays * this.state.allowanceValue) * this.state.currencyValue - (this.state.workMonths * this.state.monthlyIncomeCost)).toFixed(2) : ''}
-                    />
-                </div>
-            </div>
-        );
+            <
+            div className = "input-box-inputs" >
+            <
+            label htmlFor = "currencyValue" > Średni kurs waluty < br / > {
+                this.state.currencyValueDate && < span style = {
+                    {
+                        fontSize: '12px'
+                    }
+                } > {
+                    `(${this.changeFormateDate(this.state.currencyValueDate)}, ${this.state.currencyTable})`
+                } < /span>}</label >
+                <
+                input
+                type = "number"
+                id = "currencyValue"
+                value = {
+                    this.state.currencyValue ? this.state.currencyValue : ""
+                }
+                onChange = {
+                    this.currencyValueChangeHandler
+                }
+                step = "0.0001"
+                name = "currencyValue"
+                min = "0" /
+                >
+                <
+                /div> <
+                div className = "input-box-inputs" >
+                <
+                label htmlFor = "allowanceMonths" > Ilość miesięcy zagranicą < /label> <
+                input
+                type = "number"
+                id = "allowanceMonths"
+                value = {
+                    this.state.workMonths
+                }
+                onChange = {
+                    this.inputHandler
+                }
+                name = "workMonths"
+                min = "0" /
+                >
+                <
+                /div> <
+                div className = "input-box-inputs" >
+                <
+                label htmlFor = "allowanceValue" > Wysokość diety za dzień(EUR) < /label> <
+                input
+                type = "number"
+                id = "allowanceValue"
+                value = {
+                    this.state.allowanceValue
+                }
+                onChange = {
+                    this.inputHandler
+                }
+                name = "allowanceValue"
+                min = "0"
+                step = "0.1" /
+                >
+                <
+                /div> <
+                div className = "input-box-inputs" >
+                <
+                label htmlFor = "workDays" > Ilość dni zagranicą < /label> <
+                input
+                type = "number"
+                id = "workDays"
+                value = {
+                    this.state.workDays
+                }
+                onChange = {
+                    this.inputHandler
+                }
+                name = "workDays"
+                min = "0" /
+                >
+                <
+                /div> <
+                div className = "input-box-inputs" >
+                <
+                label htmlFor = "allAllowanceValue" > Wartość diet(EUR) < /label> <
+                input
+                readOnly
+                type = "number"
+                id = "allAllowanceValue"
+                value = {
+                    this.state.workDays ? (this.state.workDays * this.state.allowanceValue).toFixed(2) : ''
+                }
+                /> < /
+                div > <
+                div className = "input-box-inputs results" >
+                <
+                label htmlFor = "allIncomeValue" > Wartość przychodu(PLN) < br / > < span > < strong > PIT - ZG pole nr 8 < /strong><br / > PIT - ZG pole nr 9,
+                10 = 0,
+                sprawdzić pole nr 199 < /span></label >
+                <
+                input
+                type = "number"
+                readOnly
+                id = "allIncomeValue"
+                value = {
+                    this.state.currencyValue ? ((this.state.income + this.state.holidayIncome - this.state.workDays * this.state.allowanceValue) * this.state.currencyValue - (this.state.workMonths * this.state.monthlyIncomeCost)).toFixed(2) : ''
+                }
+                /> < /
+                div > <
+                /div>
+            );
+        }
     }
-}
 
-export default Germany;
+    export default Germany;
