@@ -2,6 +2,15 @@ body {
     background-image: url(../images/art-background-blank-1020317.jpg);
     // position: relative;
     // width: 100vw;
+
+    // usunięcie reklam z cba.pl
+    &>div:first-child {
+        display: none;
+    }
+
+    .cbalink {
+        display: none;
+    }
 }
 
 html {
@@ -15,11 +24,12 @@ html {
     width: 500px;
     background-color: $primary-color;
     border-radius: 10px;
-    box-shadow: 0 0 10px 2px rgba(0,0,0,.4);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, .4);
     margin: 50px auto;
 }
 
-input, select {
+input,
+select {
     margin-left: 50px;
 }
 
