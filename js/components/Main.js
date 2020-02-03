@@ -43,5 +43,4 @@ const Main = props => {
 export default Main;
 
 // TODO
-// DODANIE JAKIŚ ANIMACJI
-// ZROBIENIE JAKIEGOŚ ACTIVE FIELDA
+// DODAĆ TOOLTIPY ŻE SKOPIOWANO DO SCHOWKA
