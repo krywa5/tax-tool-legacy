@@ -5,7 +5,7 @@ class France extends Component {
     allowanceValue: 15, // to można edytować
     monthlyIncomeCost: 111.25, // to można edytować
     income: "",
-    paymentDay: `${new Date().getFullYear() - 1}-12-31`,
+    paymentDay: "",
     currencyValue: "",
     currencyValueDate: "",
     currencyTable: "",
@@ -68,8 +68,12 @@ class France extends Component {
           currencyTable: data.rates[0].no
         })
       )
-      // w wersji finalnej można dać tutaj alert
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        alert(
+          "Wystąpił błąd w pobieraniu kursu waluty. Proszę to zrobić ręcznie lub powiadomić Krystiana :)."
+        );
+      });
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -307,6 +311,7 @@ class France extends Component {
             type="number"
             readOnly
             id="allIncomeValue"
+            onClick={this.props.copyToClipboard}
             value={
               this.state.currencyValue
                 ? (

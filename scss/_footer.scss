@@ -1,11 +1,13 @@
 footer {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  width: 100%;
+  text-align: center;
 
-    strong:hover { 
-        color: white;
-    }
+  strong:hover {
+    color: white;
+  }
 }

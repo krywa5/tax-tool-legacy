@@ -1,29 +1,47 @@
-import React from 'react';
+import React from "react";
+import ReactTooltip from "react-tooltip";
 
-import Belgium from './Belgium';
-import Germany from './Germany';
-import Netherlands from './Netherlands';
-import France from './France';
+import Belgium from "./Belgium";
+import Germany from "./Germany";
+import Netherlands from "./Netherlands";
+import France from "./France";
 
-const Main = (props) => {
-    const france = {
-        income: "Total brut",
-        paymentDay: "Paye Le"
-    };
-    const germany = {
-        income: "Gesamt-Brutto"
-    };
+const Main = props => {
+  const france = {
+    income: "Total brut",
+    paymentDay: "Paye Le"
+  };
+  const germany = {
+    income: "Gesamt-Brutto"
+  };
 
-    switch (props.countryData) {
-        case 'netherlands':
-            return <Netherlands />;
-        case 'belgium':
-            return <Belgium />;
-        case 'france':
-            return <France />;
-        case 'germany':
-            return <Germany />;
-    }
-}
+  const copyToClipboard = e => {
+    const text = e.target.value;
+
+    navigator.clipboard.writeText(text).then(
+      function() {
+        alert(`Wartość ${text} skopiowano do schowka`);
+      },
+      function(err) {
+        alert("Błąd kopiowania wartości :(");
+      }
+    );
+  };
+
+  switch (props.countryData) {
+    case "netherlands":
+      return <Netherlands copyToClipboard={copyToClipboard} />;
+    case "belgium":
+      return <Belgium copyToClipboard={copyToClipboard} />;
+    case "france":
+      return <France copyToClipboard={copyToClipboard} />;
+    case "germany":
+      return <Germany copyToClipboard={copyToClipboard} />;
+  }
+};
 
 export default Main;
+
+// TODO
+// DODANIE JAKIŚ ANIMACJI
+// ZROBIENIE JAKIEGOŚ ACTIVE FIELDA

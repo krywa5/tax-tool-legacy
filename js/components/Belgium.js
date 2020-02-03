@@ -68,8 +68,12 @@ class Belgium extends Component {
           currencyTable: data.rates[0].no
         })
       )
-      // w wersji finalnej można dać tutaj alert
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        alert(
+          "Wystąpił błąd w pobieraniu kursu waluty. Proszę to zrobić ręcznie lub powiadomić Krystiana :)."
+        );
+      });
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -77,7 +81,8 @@ class Belgium extends Component {
       (previousState.startDate !== this.state.startDate ||
         previousState.endDate !== this.state.endDate ||
         previousState.daysInPoland !== this.state.daysInPoland) &&
-      this.state.startDate && this.state.endDate &&
+      this.state.startDate &&
+      this.state.endDate &&
       this.state.endDate[0] === "2"
     ) {
       this.calculateWorkDays();
@@ -289,6 +294,7 @@ class Belgium extends Component {
             type="number"
             readOnly
             id="taxValue"
+            onClick={this.props.copyToClipboard}
             value={
               this.state.currencyValue
                 ? (this.state.tax * this.state.currencyValue).toFixed(2)
@@ -309,6 +315,7 @@ class Belgium extends Component {
             type="number"
             readOnly
             id="allIncomeValue"
+            onClick={this.props.copyToClipboard}
             value={
               this.state.currencyValue
                 ? (
