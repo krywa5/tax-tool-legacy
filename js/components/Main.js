@@ -1,9 +1,9 @@
 import React from "react";
 
 import Belgium from "./Belgium";
-// import Germany from './Germany';
+import Germany from "./Germany";
 import Netherlands from "./Netherlands";
-// import France from "./France";
+import France from "./France";
 
 const Main = props => {
   const france = {
@@ -19,10 +19,10 @@ const Main = props => {
       return <Netherlands />;
     case "belgium":
       return <Belgium />;
-    // case 'france':
-    // return <France />;
-    // case "germany":
-    //   return <Germany />;
+    case "france":
+      return <France />;
+    case "germany":
+      return <Germany />;
   }
 };
 
