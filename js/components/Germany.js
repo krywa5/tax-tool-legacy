@@ -71,7 +71,7 @@ class Germany extends Component {
       .catch(error => {
         console.log(error);
         alert(
-          "Wystąpił błąd w pobieraniu kursu waluty. Proszę to zrobić ręcznie lub powiadomić Krystiana :)."
+          "Wystąpił błąd w pobieraniu kursu waluty. Proszę to zrobić ręcznie lub powiadomić Krystiana :)"
         );
       });
   }

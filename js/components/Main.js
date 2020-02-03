@@ -1,5 +1,4 @@
 import React from "react";
-import ReactTooltip from "react-tooltip";
 
 import Belgium from "./Belgium";
 import Germany from "./Germany";
