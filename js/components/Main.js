@@ -15,7 +15,7 @@ const Main = props => {
   };
 
   const copyToClipboard = e => {
-    const text = e.target.value;
+    const text = e.target.value.replace(".",",");
 
     navigator.clipboard.writeText(text).then(
       function() {

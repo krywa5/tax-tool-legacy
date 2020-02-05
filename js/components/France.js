@@ -201,7 +201,7 @@ class France extends Component {
             <span>{france.paymentDay}</span>
             <br />
             <span style={{ textDecoration: "underline" }}>
-              Zostawić puste jeśli inny niż ostatni dzień pracy
+              Wypełnić jeśli inny niż ostatni dzień pracy
             </span>
           </label>
           <input
