@@ -150,7 +150,7 @@ class Germany extends Component {
           <label htmlFor="income">
             Przychód brutto (EUR)
             <br />
-            <span>{germany.income}</span>
+            <span className="no-print">{germany.income}</span>
           </label>
           <input
             value={this.state.income}
@@ -165,7 +165,7 @@ class Germany extends Component {
           <label htmlFor="holidayIncome">
             Przychód wakacyjny (EUR)
             <br />
-            <span>{germany.holidayIncome}</span>
+            <span className="no-print">{germany.holidayIncome}</span>
           </label>
           <input
             value={this.state.holidayIncome}
@@ -285,7 +285,7 @@ class Germany extends Component {
           <label htmlFor="allIncomeValue">
             Wartość przychodu (PLN)
             <br />
-            <span>
+            <span className="no-print">
               <strong>PIT-ZG pole nr 8</strong>
               <br />
               PIT-ZG pole nr 9,10 = 0, sprawdzić pole nr 199

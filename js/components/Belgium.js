@@ -150,7 +150,7 @@ class Belgium extends Component {
           <label htmlFor="income">
             Przychód brutto (EUR)
             <br />
-            <span>{belgium.income}</span>
+            <span className="no-print">{belgium.income}</span>
           </label>
           <input
             value={this.state.income}
@@ -165,7 +165,7 @@ class Belgium extends Component {
           <label htmlFor="tax">
             Podatek (EUR)
             <br />
-            <span>{belgium.tax}</span>
+            <span className="no-print">{belgium.tax}</span>
           </label>
           <input
             value={this.state.tax}
@@ -285,7 +285,7 @@ class Belgium extends Component {
           <label htmlFor="taxValue">
             Wartość podatku (PLN)
             <br />
-            <span>
+            <span className="no-print">
               <strong>pole nr 204</strong> oraz{" "}
               <strong>PIT-ZG pole nr 10</strong>
             </span>
@@ -306,7 +306,7 @@ class Belgium extends Component {
           <label htmlFor="allIncomeValue">
             Wartość przychodu (PLN)
             <br />
-            <span>
+            <span className="no-print">
               <strong>pole nr 43</strong> oraz <strong>PIT-ZG pole nr 9</strong>
               <br />w polu PIT-ZG pole nr 8 = 0
             </span>
@@ -332,7 +332,9 @@ class Belgium extends Component {
           className="userInfo"
           style={{ borderBottom: "none", borderRadius: "0 0 10px 10px" }}
         >
-          <span className="bottomNote">Sprawdzić ulgę abolicyjną!</span>
+          <span className="bottomNote no-print">
+            Sprawdzić ulgę abolicyjną!
+          </span>
         </div>
       </div>
     );

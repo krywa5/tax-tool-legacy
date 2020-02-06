@@ -162,7 +162,7 @@ class France extends Component {
           <label htmlFor="income">
             Przychód brutto (EUR)
             <br />
-            <span>{france.income}</span>
+            <span className="no-print">{france.income}</span>
           </label>
           <input
             value={this.state.income}
@@ -198,9 +198,9 @@ class France extends Component {
           <label htmlFor="paymentDay">
             Dzień wypłaty
             <br />
-            <span>{france.paymentDay}</span>
+            <span className="no-print">{france.paymentDay}</span>
             <br />
-            <span style={{ textDecoration: "underline" }}>
+            <span style={{ textDecoration: "underline" }} className="no-print">
               Wypełnić jeśli inny niż ostatni dzień pracy
             </span>
           </label>
@@ -301,7 +301,7 @@ class France extends Component {
           <label htmlFor="allIncomeValue">
             Wartość przychodu (PLN)
             <br />
-            <span>
+            <span className="no-print">
               <strong>PIT-ZG pole nr 8</strong>
               <br />
               PIT-ZG pole nr 9,10 = 0, sprawdzić pole nr 199
