@@ -4,6 +4,7 @@ import Belgium from "./Belgium";
 import Germany from "./Germany";
 import Netherlands from "./Netherlands";
 import France from "./France";
+import USA from "./USA";
 
 const Main = props => {
   const france = {
@@ -30,21 +31,15 @@ const Main = props => {
 
   switch (props.countryData) {
     case "netherlands":
-      // body.classList.add("country-active");
       return <Netherlands copyToClipboard={copyToClipboard} />;
     case "belgium":
-      // body.classList.add("country-active");
       return <Belgium copyToClipboard={copyToClipboard} />;
     case "france":
-      // body.classList.add("country-active");
       return <France copyToClipboard={copyToClipboard} />;
     case "germany":
-      // body.classList.add("country-active");
       return <Germany copyToClipboard={copyToClipboard} />;
-    // case "":
-    //   console.log("Usuwam");
-    //   body.classList.remove("country-active");
-    //   break;
+    case "usa":
+      return <USA copyToClipboard={copyToClipboard} />;
   }
 };
 
