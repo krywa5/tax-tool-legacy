@@ -1,38 +1,88 @@
 body {
-    background-image: url(../images/art-background-blank-1020317.jpg);
-    // position: relative;
-    // width: 100vw;
-
-    // usunięcie reklam z cba.pl
-    &>div:first-child {
-        display: none;
-    }
-
-    .cbalink {
-        display: none;
-    }
-}
-
-html {
-    position: relative;
-    min-height: 100vh;
+  background-image: url(../images/art-background-blank-1020317.jpg);
+  min-height: calc(100vh + 1px);
+  position: relative;
+  padding: 50px 0;
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 500px;
-    background-color: $primary-color;
-    border-radius: 10px;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, .4);
-    margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  background-color: $primary-color;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
+  transition: 0.4s;
+}
+.wide .wrapper {
+  max-width: 800px;
+}
+
+.add-income-btn {
+  &:disabled {
+    cursor: not-allowed !important;
+  }
 }
 
 input,
 select {
-    margin-left: 50px;
+  margin-left: 50px;
+  border: 1px solid #000;
+
+  &:active,
+  &:focus {
+    box-shadow: 0px 0px 20px 5px rgba(250, 204, 0, 1);
+    outline: none;
+  }
+}
+
+#taxValue,
+#allIncomeValue,
+#valuePLN {
+  cursor: pointer;
+}
+
+#country-select {
+  &:active,
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 *::selection {
-    background-color: $secondary-color;
+  background-color: $secondary-color;
+}
+
+button.delete {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: $red;
+  outline: none;
+  border: 2px solid $red;
+  color: white;
+  vertical-align: baseline;
+  transition: 0.3s ease;
+  position: relative;
+  font-family: monospace, sans-serif;
+  font-weight: 900;
+  cursor: pointer;
+
+  &:hover {
+    background: white;
+    color: $red;
+  }
+
+  &:after {
+    content: "-";
+    position: absolute;
+    top: -112%;
+    left: -12%;
+    color: inherit;
+    font-family: monospace, sans-serif;
+    font-weight: 500;
+    font-size: 28px;
+  }
 }

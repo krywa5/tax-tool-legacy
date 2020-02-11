@@ -68,8 +68,12 @@ class Germany extends Component {
           currencyTable: data.rates[0].no
         })
       )
-      // w wersji finalnej można dać tutaj alert
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        alert(
+          "Wystąpił błąd w pobieraniu kursu waluty. Prawdopodobnie wprowadzona data jest z przyszłości albo nie masz internetu. Jeśli ani to ani to, to daj znać Krystianowi :)"
+        );
+      });
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -146,7 +150,7 @@ class Germany extends Component {
           <label htmlFor="income">
             Przychód brutto (EUR)
             <br />
-            <span>{germany.income}</span>
+            <span className="no-print">{germany.income}</span>
           </label>
           <input
             value={this.state.income}
@@ -161,7 +165,7 @@ class Germany extends Component {
           <label htmlFor="holidayIncome">
             Przychód wakacyjny (EUR)
             <br />
-            <span>{germany.holidayIncome}</span>
+            <span className="no-print">{germany.holidayIncome}</span>
           </label>
           <input
             value={this.state.holidayIncome}
@@ -281,7 +285,7 @@ class Germany extends Component {
           <label htmlFor="allIncomeValue">
             Wartość przychodu (PLN)
             <br />
-            <span>
+            <span className="no-print">
               <strong>PIT-ZG pole nr 8</strong>
               <br />
               PIT-ZG pole nr 9,10 = 0, sprawdzić pole nr 199
@@ -291,6 +295,7 @@ class Germany extends Component {
             type="number"
             readOnly
             id="allIncomeValue"
+            onClick={this.props.copyToClipboard}
             value={
               this.state.currencyValue
                 ? (

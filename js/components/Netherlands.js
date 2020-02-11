@@ -68,8 +68,12 @@ class Netherlands extends Component {
           currencyTable: data.rates[0].no
         })
       )
-      // w wersji finalnej można dać tutaj alert
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        alert(
+          "Wystąpił błąd w pobieraniu kursu waluty. Prawdopodobnie wprowadzona data jest z przyszłości albo nie masz internetu. Jeśli ani to ani to, to daj znać Krystianowi :)"
+        );
+      });
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -146,7 +150,7 @@ class Netherlands extends Component {
           <label htmlFor="income">
             Przychód brutto (EUR)
             <br />
-            <span>{netherlands.income}</span>
+            <span className="no-print">{netherlands.income}</span>
           </label>
           <input
             value={this.state.income}
@@ -161,7 +165,7 @@ class Netherlands extends Component {
           <label htmlFor="tax">
             Podatek (EUR)
             <br />
-            <span>{netherlands.tax}</span>
+            <span className="no-print">{netherlands.tax}</span>
           </label>
           <input
             value={this.state.tax}
@@ -281,8 +285,8 @@ class Netherlands extends Component {
           <label htmlFor="taxValue">
             Wartość podatku (PLN)
             <br />
-            <span>
-              <strong>pole nr 204</strong> oraz{" "}
+            <span className="no-print">
+              <strong>pole nr 204</strong> oraz
               <strong>PIT-ZG pole nr 10</strong>
             </span>
           </label>
@@ -290,6 +294,7 @@ class Netherlands extends Component {
             type="number"
             readOnly
             id="taxValue"
+            onClick={this.props.copyToClipboard}
             value={
               this.state.currencyValue
                 ? (this.state.tax * this.state.currencyValue).toFixed(2)
@@ -301,7 +306,7 @@ class Netherlands extends Component {
           <label htmlFor="allIncomeValue">
             Wartość przychodu (PLN)
             <br />
-            <span>
+            <span className="no-print">
               <strong>pole nr 43</strong> oraz <strong>PIT-ZG pole nr 9</strong>
               <br />w polu PIT-ZG pole nr 8 = 0
             </span>
@@ -309,6 +314,7 @@ class Netherlands extends Component {
           <input
             type="number"
             readOnly
+            onClick={this.props.copyToClipboard}
             id="allIncomeValue"
             value={
               this.state.currencyValue
@@ -326,7 +332,9 @@ class Netherlands extends Component {
           className="userInfo"
           style={{ borderBottom: "none", borderRadius: "0 0 10px 10px" }}
         >
-          <span className="bottomNote">Sprawdzić ulgę abolicyjną!</span>
+          <span className="bottomNote no-print">
+            Sprawdzić ulgę abolicyjną!
+          </span>
         </div>
       </div>
     );

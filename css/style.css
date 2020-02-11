@@ -4,29 +4,19 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #000;
 }
 
 body {
   background-image: url(../images/art-background-blank-1020317.jpg);
-}
-
-body > div:first-child {
-  display: none;
-}
-
-body .cbalink {
-  display: none;
-}
-
-html {
+  min-height: calc(100vh + 1px);
   position: relative;
-  min-height: 100vh;
+  padding: 50px 0;
 }
 
 .wrapper {
@@ -35,19 +25,52 @@ html {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  width: 500px;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
   background-color: #6da7fd;
   border-radius: 10px;
   -webkit-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.4);
-          box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.4);
-  margin: 50px auto;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.wide .wrapper {
+  max-width: 800px;
+}
+
+.add-income-btn:disabled {
+  cursor: not-allowed !important;
 }
 
 input,
 select {
   margin-left: 50px;
+  border: 1px solid #000;
+}
+
+input:active,
+input:focus,
+select:active,
+select:focus {
+  -webkit-box-shadow: 0px 0px 20px 5px #facc00;
+  box-shadow: 0px 0px 20px 5px #facc00;
+  outline: none;
+}
+
+#taxValue,
+#allIncomeValue,
+#valuePLN {
+  cursor: pointer;
+}
+
+#country-select:active,
+#country-select:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 *::-moz-selection {
@@ -58,18 +81,51 @@ select {
   background-color: #facc00;
 }
 
+button.delete {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: crimson;
+  outline: none;
+  border: 2px solid crimson;
+  color: white;
+  vertical-align: baseline;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  position: relative;
+  font-family: monospace, sans-serif;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+button.delete:hover {
+  background: white;
+  color: crimson;
+}
+
+button.delete:after {
+  content: "-";
+  position: absolute;
+  top: -112%;
+  left: -12%;
+  color: inherit;
+  font-family: monospace, sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+}
+
 .header {
   background-color: #0355ce;
   text-align: center;
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 100px;
-          flex: 0 0 100px;
+  -ms-flex: 0 0 100px;
+  flex: 0 0 100px;
   width: 100%;
   border-radius: 10px 10px 0 0;
 }
 
 .header h1 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   text-shadow: 0 0 45px black, 0 0 30px black, 0 0 15px black, 0 0 5px black;
   color: white;
   text-transform: uppercase;
@@ -84,15 +140,15 @@ select {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   background-color: #227afc;
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 75px;
-          flex: 0 0 75px;
+  -ms-flex: 0 0 75px;
+  flex: 0 0 75px;
   width: 100%;
   font-size: 20px;
 }
@@ -109,8 +165,8 @@ select {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .input-box .userInfo {
@@ -129,16 +185,34 @@ select {
   letter-spacing: 2px;
 }
 
+.input-box .add-income-btn {
+  padding: 15px 30px;
+  background-color: #facc00;
+  text-transform: uppercase;
+  font-size: 24px;
+  border: 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
+}
+
+.input-box .add-income-btn:hover {
+  background-color: #c7a200;
+}
+
 .input-box-inputs {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   padding: 15px;
   border-bottom: 1px solid black;
   font-size: 20px;
@@ -191,15 +265,137 @@ select {
   background-color: #227afc;
 }
 
+.income-list {
+  padding: 15px;
+}
+
+.income-list > span {
+  text-align: center;
+  display: block;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.income-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.income-list table th,
+.income-list table td {
+  text-align: center;
+  padding: 4px 5px;
+}
+
+.income-list table thead th {
+  padding-bottom: 15px;
+}
+
+.income-list table tbody tr:last-child td {
+  padding-bottom: 15px;
+}
+
+.income-list table tbody td:last-child,
+.income-list table tbody td:nth-last-child(2),
+.income-list table tbody td:nth-last-child(3) {
+  text-align: right;
+}
+
+.income-list table tfoot th {
+  padding-top: 15px;
+}
+
+.income-list table tfoot th:last-child,
+.income-list table tfoot th:nth-last-child(2),
+.income-list table tfoot th:nth-last-child(3),
+.income-list table tfoot th:nth-last-child(4) {
+  border-top: 1px solid black;
+  text-align: right;
+}
+
+.income-list table tfoot th:nth-last-child(4) {
+  text-align: center;
+}
+
 footer {
   position: absolute;
   bottom: 10px;
   left: 50%;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   font-size: 12px;
+  width: 100%;
+  text-align: center;
 }
 
 footer strong:hover {
   color: white;
+}
+
+.print-btn {
+  display: none;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 20px 50px;
+  border-radius: 10px;
+  background-color: #0355ce;
+  -webkit-box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.6);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border: 0;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  outline: none;
+}
+
+.print-btn:hover {
+  bottom: 52px;
+}
+
+.print-btn:hover::after {
+  opacity: 1;
+}
+
+.print-btn::after {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: block;
+  content: "";
+  -webkit-box-shadow: 0 17px 19px -7px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 17px 19px -7px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+body.country-active .print-btn {
+  display: block;
+}
+
+@media only screen and (max-width: 980px) {
+  body {
+    padding: 0 0 50px;
+  }
+  footer {
+    font-size: 16px;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background-image: unset;
+  }
 }

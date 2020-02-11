@@ -5,7 +5,7 @@ class France extends Component {
     allowanceValue: 15, // to można edytować
     monthlyIncomeCost: 111.25, // to można edytować
     income: "",
-    paymentDay: `${new Date().getFullYear() - 1}-12-31`,
+    paymentDay: "",
     currencyValue: "",
     currencyValueDate: "",
     currencyTable: "",
@@ -68,8 +68,12 @@ class France extends Component {
           currencyTable: data.rates[0].no
         })
       )
-      // w wersji finalnej można dać tutaj alert
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        alert(
+          "Wystąpił błąd w pobieraniu kursu waluty. Prawdopodobnie wprowadzona data jest z przyszłości albo nie masz internetu. Jeśli ani to ani to, to daj znać Krystianowi :)"
+        );
+      });
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -158,7 +162,7 @@ class France extends Component {
           <label htmlFor="income">
             Przychód brutto (EUR)
             <br />
-            <span>{france.income}</span>
+            <span className="no-print">{france.income}</span>
           </label>
           <input
             value={this.state.income}
@@ -194,10 +198,10 @@ class France extends Component {
           <label htmlFor="paymentDay">
             Dzień wypłaty
             <br />
-            <span>{france.paymentDay}</span>
+            <span className="no-print">{france.paymentDay}</span>
             <br />
-            <span style={{ textDecoration: "underline" }}>
-              Zostawić puste jeśli inny niż ostatni dzień pracy
+            <span style={{ textDecoration: "underline" }} className="no-print">
+              Wypełnić jeśli inny niż ostatni dzień pracy
             </span>
           </label>
           <input
@@ -297,7 +301,7 @@ class France extends Component {
           <label htmlFor="allIncomeValue">
             Wartość przychodu (PLN)
             <br />
-            <span>
+            <span className="no-print">
               <strong>PIT-ZG pole nr 8</strong>
               <br />
               PIT-ZG pole nr 9,10 = 0, sprawdzić pole nr 199
@@ -307,6 +311,7 @@ class France extends Component {
             type="number"
             readOnly
             id="allIncomeValue"
+            onClick={this.props.copyToClipboard}
             value={
               this.state.currencyValue
                 ? (

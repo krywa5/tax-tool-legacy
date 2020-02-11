@@ -1,0 +1,52 @@
+.income-list {
+  padding: 15px;
+
+  & > span {
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      text-align: center;
+      padding: 4px 5px;
+    }
+
+    thead th {
+      padding-bottom: 15px;
+    }
+
+    tbody {
+      tr:last-child td {
+        padding-bottom: 15px;
+      }
+
+      td:last-child,
+      td:nth-last-child(2),
+      td:nth-last-child(3) {
+        text-align: right;
+      }
+    }
+
+    tfoot th {
+      padding-top: 15px;
+
+      &:last-child,
+      &:nth-last-child(2),
+      &:nth-last-child(3),
+      &:nth-last-child(4) {
+        border-top: 1px solid black;
+        text-align: right;
+      }
+      &:nth-last-child(4) {
+        text-align: center;
+      }
+    }
+  }
+}
