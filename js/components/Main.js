@@ -44,6 +44,3 @@ const Main = props => {
 };
 
 export default Main;
-
-// TODO
-// DODAĆ TOOLTIPY ŻE SKOPIOWANO DO SCHOWKA

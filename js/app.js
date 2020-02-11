@@ -32,8 +32,14 @@ class App extends Component {
   componentDidUpdate() {
     if (this.state.isCountryChosen) {
       body.classList.add("country-active");
+      if (this.state.country === "usa") {
+        body.classList.add("wide");
+      } else {
+        body.classList.remove("wide");
+      }
     } else {
       body.classList.remove("country-active");
+      body.classList.remove("usa");
     }
   }
 

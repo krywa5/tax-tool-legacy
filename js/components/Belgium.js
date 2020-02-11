@@ -71,7 +71,7 @@ class Belgium extends Component {
       .catch(error => {
         console.log(error);
         alert(
-          "Wystąpił błąd w pobieraniu kursu waluty. Proszę to zrobić ręcznie lub powiadomić Krystiana :)"
+          "Wystąpił błąd w pobieraniu kursu waluty. Prawdopodobnie wprowadzona data jest z przyszłości albo nie masz internetu. Jeśli ani to ani to, to daj znać Krystianowi :)"
         );
       });
   }

@@ -34,6 +34,16 @@ body {
   -webkit-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.4);
           box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.4);
   margin: 0 auto;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.wide .wrapper {
+  max-width: 800px;
+}
+
+.add-income-btn:disabled {
+  cursor: not-allowed !important;
 }
 
 input,
@@ -67,6 +77,39 @@ select:focus {
 
 *::selection {
   background-color: #facc00;
+}
+
+button.delete {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: crimson;
+  outline: none;
+  border: 2px solid crimson;
+  color: white;
+  vertical-align: baseline;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  position: relative;
+  font-family: monospace, sans-serif;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+button.delete:hover {
+  background: white;
+  color: crimson;
+}
+
+button.delete:after {
+  content: "-";
+  position: absolute;
+  top: -112%;
+  left: -12%;
+  color: inherit;
+  font-family: monospace, sans-serif;
+  font-weight: 500;
+  font-size: 28px;
 }
 
 .header {
@@ -140,6 +183,24 @@ select:focus {
   letter-spacing: 2px;
 }
 
+.input-box .add-income-btn {
+  padding: 15px 30px;
+  background-color: #facc00;
+  text-transform: uppercase;
+  font-size: 24px;
+  border: 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
+}
+
+.input-box .add-income-btn:hover {
+  background-color: #c7a200;
+}
+
 .input-box-inputs {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -200,6 +261,55 @@ select:focus {
 
 .input-box .results input::selection {
   background-color: #227afc;
+}
+
+.income-list {
+  padding: 15px;
+}
+
+.income-list > span {
+  text-align: center;
+  display: block;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.income-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.income-list table th,
+.income-list table td {
+  text-align: center;
+  padding: 4px 5px;
+}
+
+.income-list table thead th {
+  padding-bottom: 15px;
+}
+
+.income-list table tbody tr:last-child td {
+  padding-bottom: 15px;
+}
+
+.income-list table tbody td:last-child,
+.income-list table tbody td:nth-last-child(2),
+.income-list table tbody td:nth-last-child(3) {
+  text-align: right;
+}
+
+.income-list table tfoot th {
+  padding-top: 15px;
+}
+
+.income-list table tfoot th:last-child, .income-list table tfoot th:nth-last-child(2), .income-list table tfoot th:nth-last-child(3), .income-list table tfoot th:nth-last-child(4) {
+  border-top: 1px solid black;
+  text-align: right;
+}
+
+.income-list table tfoot th:nth-last-child(4) {
+  text-align: center;
 }
 
 footer {

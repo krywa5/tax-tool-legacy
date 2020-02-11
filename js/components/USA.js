@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 
+//TODO
+// Wyłączyć przycisk gdy wartość przychodu (PLN) = 0
+// Możliwość usunięcia pozycji z listy
+
 class USA extends Component {
   state = {
     income: "",
     currencyValue: "",
     currencyValueDate: "",
     currencyTable: "",
-    date: ""
+    date: "",
+    overall: 0,
+    incomes: []
   };
 
   inputHandler = e => {
@@ -25,6 +31,39 @@ class USA extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+
+    // Nieudana walidacja
+
+    // const today = new Date();
+    // const inputDate = new Date(e.target.value);
+
+    // if (today >= inputDate) {
+    //   if (e.target.value) {
+    //     this.setState({
+    //       [e.target.name]: e.target.value
+    //     });
+    //   } else {
+    //     this.setState({
+    //       [e.target.name]: ""
+    //     });
+    //   }
+    // } else {
+    //   alert("Podana data jest z przyszłości !!!");
+    // }
+  };
+
+  handleSubmit = e => {
+    if (e.key === "Enter") {
+      // console.log("dodano do listy");
+      this.addToIncomeList();
+    }
+  };
+
+  clearIncome = () => {
+    this.setState({
+      income: ""
+    });
+    this.income.focus();
   };
 
   checkWeekend = date => {
@@ -57,7 +96,7 @@ class USA extends Component {
       .catch(error => {
         console.log(error);
         alert(
-          "Wystąpił błąd w pobieraniu kursu waluty. Proszę to zrobić ręcznie lub powiadomić Krystiana :)"
+          "Wystąpił błąd w pobieraniu kursu waluty. Prawdopodobnie wprowadzona data jest z przyszłości albo nie masz internetu. Jeśli ani to ani to, to daj znać Krystianowi :)"
         );
       });
   }
@@ -92,10 +131,52 @@ class USA extends Component {
     });
   };
 
+  addToIncomeList = e => {
+    if (this.state.income === "" || this.state.currencyValueDate === "") {
+      return;
+    }
+
+    const newIncome = {
+      id: Date.now(),
+      date: this.state.date,
+      table: this.state.currencyTable,
+      currencyValue: this.state.currencyValue,
+      incomeUSD: this.state.income,
+      incomePLN: (this.state.income * this.state.currencyValue).toFixed(2),
+      overall: this.state.overall + this.state.income * this.state.currencyValue
+    };
+
+    this.setState(prevState => ({
+      incomes: [...prevState.incomes, newIncome],
+      overall: newIncome.overall
+    }));
+
+    this.clearIncome();
+  };
+
+  handleDeleteBtn = e => {
+    const incomes = [...this.state.incomes];
+    const incomeID = e.target.parentElement.parentElement.dataset.id;
+    const output = [];
+
+    incomes.forEach((el, i) => {
+      if (el.id != incomeID) {
+        output.push(el);
+      }
+    });
+
+    this.setState({
+      incomes: output
+    });
+  };
+
   render() {
+    let overallIncomePLN = 0;
+    let overallIncomeUSD = 0;
+
     return (
       <div className="input-box">
-        <div className="input-box-inputs">
+        <div className="input-box-inputs no-print">
           <label htmlFor="income">Przychód (USD)</label>
           <input
             value={this.state.income}
@@ -104,9 +185,12 @@ class USA extends Component {
             type="number"
             id="income"
             min="0"
+            ref={input => {
+              this.income = input;
+            }}
           />
         </div>
-        <div className="input-box-inputs">
+        <div className="input-box-inputs no-print">
           <label htmlFor="date">Data przychodu</label>
           <input
             type="date"
@@ -114,17 +198,18 @@ class USA extends Component {
             value={this.state.date}
             name="date"
             onChange={this.dateInputHandler}
+            onKeyPress={this.handleSubmit}
             max={new Date().toISOString().slice(0, 10)}
           />
         </div>
 
         {/* INPUTY WYPEŁNIANE AUTOMATYCZNIE */}
-        <div className="userInfo">
+        <div className="userInfo no-print">
           Wartości poniżej są obliczane automatycznie
         </div>
 
         {/* INPUTY WYPEŁNIANE AUTOMATYCZNIE */}
-        <div className="input-box-inputs">
+        <div className="input-box-inputs no-print">
           <label htmlFor="currencyValue">
             Średni kurs waluty
             <br />
@@ -144,7 +229,7 @@ class USA extends Component {
             min="0"
           />
         </div>
-        <div className="input-box-inputs results">
+        <div className="input-box-inputs results no-print">
           <label htmlFor="valuePLN">Wartość przychodu (PLN)</label>
           <input
             type="number"
@@ -157,6 +242,84 @@ class USA extends Component {
                 : ""
             }
           />
+        </div>
+        <button
+          className="add-income-btn no-print"
+          onClick={this.addToIncomeList}
+          disabled={
+            this.state.income && this.state.currencyValue ? false : true
+          }
+        >
+          Dodaj pozycję
+        </button>
+        <div className="income-list">
+          <span className="list-title">Lista przychodów</span>
+          <table>
+            <thead>
+              <tr>
+                <th>Lp.</th>
+                <th>Data wpłaty</th>
+                <th>Tabela</th>
+                <th>Kurs waluty</th>
+                <th>Przychód USD</th>
+                <th>Przychód PLN</th>
+                <th className="no-print"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.incomes.map((el, i) => {
+                const incomeUSD = String(
+                  (Math.round(el.incomeUSD * 100) / 100).toFixed(2)
+                ).replace(".", ",");
+
+                const incomePLN = String(
+                  (Math.round(el.incomePLN * 100) / 100).toFixed(2)
+                ).replace(".", ",");
+
+                overallIncomePLN += el.incomePLN * 1;
+                overallIncomeUSD += el.incomeUSD * 1;
+
+                return (
+                  <tr data-id={el.id} key={i}>
+                    <td>{i + 1}</td>
+                    <td>{el.date}</td>
+                    <td>{el.table}</td>
+                    <td>{el.currencyValue.replace(".", ",")}</td>
+                    <td>{incomeUSD}</td>
+                    <td>{incomePLN}</td>
+                    <td className="no-print">
+                      <button
+                        className="delete"
+                        title="Usuń"
+                        onClick={this.handleDeleteBtn}
+                      ></button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Łącznie</th>
+                <th>
+                  {String(
+                    (Math.round(overallIncomeUSD * 100) / 100).toFixed(2)
+                  ).replace(".", ",")}{" "}
+                  USD
+                </th>
+                <th>
+                  {String(
+                    (Math.round(overallIncomePLN * 100) / 100).toFixed(2)
+                  ).replace(".", ",")}{" "}
+                  PLN
+                </th>
+                <th className="no-print"></th>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </div>
     );
