@@ -4,16 +4,17 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 html {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #000;
 }
 
 body {
-  background-image: url(../images/art-background-blank-1020317.jpg);
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0.6))), url(../images/storm-4805037_1920.jpg);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../images/storm-4805037_1920.jpg);
   min-height: calc(100vh + 1px);
   position: relative;
   padding: 50px 0;
@@ -25,14 +26,14 @@ body {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 100%;
   max-width: 500px;
   background-color: #6da7fd;
   border-radius: 10px;
   -webkit-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.4);
   margin: 0 auto;
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -52,12 +53,11 @@ select {
   border: 1px solid #000;
 }
 
-input:active,
-input:focus,
+input:active, input:focus,
 select:active,
 select:focus {
   -webkit-box-shadow: 0px 0px 20px 5px #facc00;
-  box-shadow: 0px 0px 20px 5px #facc00;
+          box-shadow: 0px 0px 20px 5px #facc00;
   outline: none;
 }
 
@@ -67,10 +67,9 @@ select:focus {
   cursor: pointer;
 }
 
-#country-select:active,
-#country-select:focus {
+#country-select:active, #country-select:focus {
   -webkit-box-shadow: none;
-  box-shadow: none;
+          box-shadow: none;
 }
 
 *::-moz-selection {
@@ -118,8 +117,8 @@ button.delete:after {
   background-color: #0355ce;
   text-align: center;
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 100px;
-  flex: 0 0 100px;
+      -ms-flex: 0 0 100px;
+          flex: 0 0 100px;
   width: 100%;
   border-radius: 10px 10px 0 0;
 }
@@ -140,17 +139,20 @@ button.delete:after {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background-color: #227afc;
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 75px;
-  flex: 0 0 75px;
+      -ms-flex: 0 0 75px;
+          flex: 0 0 75px;
   width: 100%;
   font-size: 20px;
+  border-radius: 0 0 10px 10px;
+  -webkit-transition: border-radius 1s ease;
+  transition: border-radius 1s ease;
 }
 
 .country-bar select {
@@ -159,14 +161,18 @@ button.delete:after {
   cursor: pointer;
 }
 
+body.country-active .country-bar {
+  border-radius: 0;
+}
+
 .input-box {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .input-box .userInfo {
@@ -208,11 +214,11 @@ button.delete:after {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 15px;
   border-bottom: 1px solid black;
   font-size: 20px;
@@ -305,10 +311,7 @@ button.delete:after {
   padding-top: 15px;
 }
 
-.income-list table tfoot th:last-child,
-.income-list table tfoot th:nth-last-child(2),
-.income-list table tfoot th:nth-last-child(3),
-.income-list table tfoot th:nth-last-child(4) {
+.income-list table tfoot th:last-child, .income-list table tfoot th:nth-last-child(2), .income-list table tfoot th:nth-last-child(3), .income-list table tfoot th:nth-last-child(4) {
   border-top: 1px solid black;
   text-align: right;
 }
@@ -322,7 +325,7 @@ footer {
   bottom: 10px;
   left: 50%;
   -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
+          transform: translateX(-50%);
   font-size: 12px;
   width: 100%;
   text-align: center;
@@ -344,7 +347,7 @@ footer strong:hover {
   border-radius: 10px;
   background-color: #0355ce;
   -webkit-box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.6);
-  box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.6);
   -webkit-transition: 0.3s;
   transition: 0.3s;
   border: 0;
@@ -372,7 +375,7 @@ footer strong:hover {
   display: block;
   content: "";
   -webkit-box-shadow: 0 17px 19px -7px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 17px 19px -7px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 17px 19px -7px rgba(0, 0, 0, 0.4);
   opacity: 0;
   -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s;
