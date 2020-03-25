@@ -8,11 +8,12 @@ class Netherlands extends Component {
     tax: "",
     currencyValue: "",
     currencyValueDate: "",
+    currencyValueDateAPI: "",
     currencyTable: "",
     workDays: "",
     workMonths: "",
-    startDate: `${new Date().getFullYear() - 1}-01-01`,
-    endDate: `${new Date().getFullYear() - 1}-12-31`,
+    startDate: "",
+    endDate: "",
     daysInPoland: 0
   };
 
@@ -65,6 +66,7 @@ class Netherlands extends Component {
         this.setState({
           currencyValue: data.rates[0].mid.toFixed(4),
           currencyValueDate: data.rates[0].effectiveDate,
+          currencyValueDateAPI: data.rates[0].effectiveDate,
           currencyTable: data.rates[0].no
         })
       )
@@ -223,7 +225,7 @@ class Netherlands extends Component {
             <br />
             {this.state.currencyValueDate && (
               <span style={{ fontSize: "12px" }}>{`(${this.changeFormateDate(
-                this.state.currencyValueDate
+                this.state.currencyValueDateAPI
               )}, ${this.state.currencyTable})`}</span>
             )}
           </label>

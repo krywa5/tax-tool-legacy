@@ -7,14 +7,6 @@ import France from "./France";
 import USA from "./USA";
 
 const Main = props => {
-  const france = {
-    income: "Total brut",
-    paymentDay: "Paye Le"
-  };
-  const germany = {
-    income: "Gesamt-Brutto"
-  };
-
   const copyToClipboard = e => {
     const text = e.target.value.replace(".", ",");
 

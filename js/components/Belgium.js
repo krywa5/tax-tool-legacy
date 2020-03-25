@@ -5,14 +5,16 @@ class Belgium extends Component {
     allowanceValue: 14.4, // to można edytować
     monthlyIncomeCost: 111.25, // to można edytować
     income: "",
+    paymentDay: "",
     tax: "",
     currencyValue: "",
     currencyValueDate: "",
+    currencyValueDateAPI: "",
     currencyTable: "",
     workDays: "",
     workMonths: "",
-    startDate: `${new Date().getFullYear() - 1}-01-01`,
-    endDate: `${new Date().getFullYear() - 1}-12-31`,
+    startDate: "",
+    endDate: "",
     daysInPoland: 0
   };
 
@@ -37,23 +39,23 @@ class Belgium extends Component {
   checkWeekend = date => {
     let output = false;
     let newDate = new Date(date);
+
     newDate.setDate(newDate.getDate() - 1);
-    // console.log(newDate);
+
     !(newDate.getDay() % 6) ? (output = true) : (output = false);
-    // console.log(`Pierwsza iteracja ${output}`);
+
     if (output === true) {
       newDate.setDate(newDate.getDate() - 1);
     }
-    // console.log(newDate);
+
     !(newDate.getDay() % 6) ? (output = true) : (output = false);
-    // console.log(`Druga iteracja ${output}`);
+
     if (output === true) {
       newDate.setDate(newDate.getDate() - 1);
     }
-    // console.log(newDate);
+
     !(newDate.getDay() % 6) ? (output = true) : (output = false);
-    // console.log(`Trzecia iteracja ${output}`);
-    // console.log(`ostateczna data: ${newDate}`);
+
     return newDate.toISOString().slice(0, 10);
   };
 
@@ -61,13 +63,15 @@ class Belgium extends Component {
     const API_URL = `http://api.nbp.pl/api/exchangerates/rates/a/eur/${this.state.currencyValueDate}/?format=json`;
     fetch(API_URL)
       .then(response => response.json())
-      .then(data =>
+      .then(data => {
+        console.log(data.rates[0]);
         this.setState({
           currencyValue: data.rates[0].mid.toFixed(4),
           currencyValueDate: data.rates[0].effectiveDate,
+          currencyValueDateAPI: data.rates[0].effectiveDate,
           currencyTable: data.rates[0].no
-        })
-      )
+        });
+      })
       .catch(error => {
         console.log(error);
         alert(
@@ -77,13 +81,22 @@ class Belgium extends Component {
   }
 
   componentDidUpdate(previousProps, previousState) {
+    // Warunki dla Belgii/ są troszkę inne niż dla pozostałych krajów ze względu na to że wypłata mogłabyć w innym dniu niż w ostanim dniu pracy
     if (
-      (previousState.startDate !== this.state.startDate ||
+      ((previousState.startDate !== this.state.startDate ||
         previousState.endDate !== this.state.endDate ||
         previousState.daysInPoland !== this.state.daysInPoland) &&
-      this.state.startDate &&
-      this.state.endDate &&
-      this.state.endDate[0] === "2"
+        this.state.startDate &&
+        this.state.endDate &&
+        this.state.endDate[0] === "2") ||
+      (previousState.paymentDay !== this.state.paymentDay &&
+        this.state.paymentDay[0] === "2" &&
+        this.state.startDate &&
+        this.state.endDate) ||
+      (previousState.paymentDay !== "" &&
+        this.state.paymentDay === "" &&
+        this.state.startDate &&
+        this.state.endDate)
     ) {
       this.calculateWorkDays();
       this.setState({
@@ -92,7 +105,10 @@ class Belgium extends Component {
           this.state.endDate,
           this.state.daysInPoland
         ),
-        currencyValueDate: this.checkWeekend(this.state.endDate),
+        currencyValueDate:
+          this.state.paymentDay === ""
+            ? this.checkWeekend(this.state.endDate)
+            : this.checkWeekend(this.state.paymentDay),
         workMonths: this.calculateWorkDays()
       });
     }
@@ -141,7 +157,8 @@ class Belgium extends Component {
   render() {
     const belgium = {
       income: "Loon loonbelasting/volksverzekeringen",
-      tax: "Ingehouden loonbelasting/premie volksverz. (loonheffing)"
+      tax: "Ingehouden loonbelasting/premie volksverz. (loonheffing)",
+      paymentDay: "Paye Le" // TODO: sprawdzić czy tak jest
     };
 
     return (
@@ -199,6 +216,25 @@ class Belgium extends Component {
           />
         </div>
         <div className="input-box-inputs">
+          <label htmlFor="paymentDay">
+            Dzień wypłaty
+            <br />
+            <span className="no-print">{belgium.paymentDay}</span>
+            <br />
+            <span style={{ textDecoration: "underline" }} className="no-print">
+              Wypełnić jeśli inny niż ostatni dzień pracy
+            </span>
+          </label>
+          <input
+            // value={this.state.paymentDay}
+            name="paymentDay"
+            type="date"
+            id="paymentDay"
+            onBlur={this.dateInputHandler}
+            max={new Date().toISOString().slice(0, 10)}
+          />
+        </div>
+        <div className="input-box-inputs">
           <label htmlFor="daysInPoland">Dni spędzone w Polsce</label>
           <input
             type="number"
@@ -221,7 +257,7 @@ class Belgium extends Component {
             <br />
             {this.state.currencyValueDate && (
               <span style={{ fontSize: "12px" }}>{`(${this.changeFormateDate(
-                this.state.currencyValueDate
+                this.state.currencyValueDateAPI
               )}, ${this.state.currencyTable})`}</span>
             )}
           </label>
