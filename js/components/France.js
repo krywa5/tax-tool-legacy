@@ -178,9 +178,9 @@ class France extends Component {
           <input
             type="date"
             id="startDate"
-            value={this.state.startDate}
+            // value={this.state.startDate}
             name="startDate"
-            onChange={this.dateInputHandler}
+            onBlur={this.dateInputHandler}
           />
         </div>
         <div className="input-box-inputs">
@@ -188,9 +188,9 @@ class France extends Component {
           <input
             type="date"
             id="endDate"
-            value={this.state.endDate}
+            // value={this.state.endDate}
             name="endDate"
-            onChange={this.dateInputHandler}
+            onBlur={this.dateInputHandler}
             max={new Date().toISOString().slice(0, 10)}
           />
         </div>
@@ -205,11 +205,11 @@ class France extends Component {
             </span>
           </label>
           <input
-            value={this.state.paymentDay}
+            // value={this.state.paymentDay}
             name="paymentDay"
             type="date"
             id="paymentDay"
-            onChange={this.dateInputHandler}
+            onBlur={this.dateInputHandler}
             max={new Date().toISOString().slice(0, 10)}
           />
         </div>

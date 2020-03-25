@@ -83,10 +83,10 @@ button.delete {
   &:after {
     content: "-";
     position: absolute;
-    top: -112%;
-    left: -12%;
+    top: -13px;
+    left: 2px;
     color: inherit;
-    font-family: monospace, sans-serif;
+    font-family: arial, sans-serif;
     font-weight: 500;
     font-size: 28px;
   }

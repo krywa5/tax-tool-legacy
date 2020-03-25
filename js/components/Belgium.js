@@ -181,9 +181,10 @@ class Belgium extends Component {
           <input
             type="date"
             id="startDate"
-            value={this.state.startDate}
+            // value={this.state.startDate}
             name="startDate"
-            onChange={this.dateInputHandler}
+            onBlur={this.dateInputHandler}
+            max={new Date().toISOString().slice(0, 10)}
           />
         </div>
         <div className="input-box-inputs">
@@ -191,9 +192,9 @@ class Belgium extends Component {
           <input
             type="date"
             id="endDate"
-            value={this.state.endDate}
+            // value={this.state.endDate}
             name="endDate"
-            onChange={this.dateInputHandler}
+            onBlur={this.dateInputHandler}
             max={new Date().toISOString().slice(0, 10)}
           />
         </div>

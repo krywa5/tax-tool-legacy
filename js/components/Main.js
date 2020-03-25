@@ -14,7 +14,6 @@ const Main = props => {
   const germany = {
     income: "Gesamt-Brutto"
   };
-  const body = document.querySelector("body");
 
   const copyToClipboard = e => {
     const text = e.target.value.replace(".", ",");

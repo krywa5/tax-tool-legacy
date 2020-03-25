@@ -1,2 +1,0 @@
-- aktualizacja daty kursu tylko poprzez api
-- walidacja daty
