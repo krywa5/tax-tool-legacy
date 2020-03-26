@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 class Netherlands extends Component {
   state = {
-    allowanceValue: 15, // to można edytować
-    monthlyIncomeCost: 111.25, // to można edytować
+    allowanceValue: this.props.countryData.netherlands.diet,
+    monthlyIncomeCost: this.props.countryData.netherlands.monthlyIncomeCost,
     income: "",
     tax: "",
     currencyValue: "",
@@ -141,18 +141,15 @@ class Netherlands extends Component {
   };
 
   render() {
-    const netherlands = {
-      income: "Loon loonbelasting/volksverzekeringen",
-      tax: "Ingehouden loonbelasting/premie volksverz. (loonheffing)"
-    };
+    const { income, tax } = this.props.countryData.netherlands;
 
     return (
       <div className="input-box">
         <div className="input-box-inputs">
           <label htmlFor="income">
-            Przychód brutto (EUR)
+            Przychód brutto ({this.props.countryData.netherlands.currency})
             <br />
-            <span className="no-print">{netherlands.income}</span>
+            <span className="no-print">{income}</span>
           </label>
           <input
             value={this.state.income}
@@ -165,9 +162,9 @@ class Netherlands extends Component {
         </div>
         <div className="input-box-inputs">
           <label htmlFor="tax">
-            Podatek (EUR)
+            Podatek ({this.props.countryData.netherlands.currency})
             <br />
-            <span className="no-print">{netherlands.tax}</span>
+            <span className="no-print">{tax}</span>
           </label>
           <input
             value={this.state.tax}
@@ -251,7 +248,10 @@ class Netherlands extends Component {
           />
         </div>
         <div className="input-box-inputs">
-          <label htmlFor="allowanceValue">Wysokość diety za dzień (EUR)</label>
+          <label htmlFor="allowanceValue">
+            Wysokość diety za dzień (
+            {this.props.countryData.netherlands.currency})
+          </label>
           <input
             type="number"
             id="allowanceValue"
@@ -274,7 +274,9 @@ class Netherlands extends Component {
           />
         </div>
         <div className="input-box-inputs">
-          <label htmlFor="allAllowanceValue">Wartość diet (EUR)</label>
+          <label htmlFor="allAllowanceValue">
+            Wartość diet ({this.props.countryData.netherlands.currency})
+          </label>
           <input
             readOnly
             type="number"

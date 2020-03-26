@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 class Belgium extends Component {
   state = {
-    allowanceValue: 14.4, // to można edytować
-    monthlyIncomeCost: 111.25, // to można edytować
+    allowanceValue: this.props.countryData.belgium.diet,
+    monthlyIncomeCost: this.props.countryData.belgium.monthlyIncomeCost,
     income: "",
     paymentDay: "",
     tax: "",
@@ -155,19 +155,15 @@ class Belgium extends Component {
   };
 
   render() {
-    const belgium = {
-      income: "Loon loonbelasting/volksverzekeringen",
-      tax: "Ingehouden loonbelasting/premie volksverz. (loonheffing)",
-      paymentDay: "Paye Le" // TODO: sprawdzić czy tak jest
-    };
+    const { income, tax, paymentDay } = this.props.countryData.belgium;
 
     return (
       <div className="input-box">
         <div className="input-box-inputs">
           <label htmlFor="income">
-            Przychód brutto (EUR)
+            Przychód brutto ({this.props.countryData.belgium.currency})
             <br />
-            <span className="no-print">{belgium.income}</span>
+            <span className="no-print">{income}</span>
           </label>
           <input
             value={this.state.income}
@@ -180,9 +176,9 @@ class Belgium extends Component {
         </div>
         <div className="input-box-inputs">
           <label htmlFor="tax">
-            Podatek (EUR)
+            Podatek ({this.props.countryData.belgium.currency})
             <br />
-            <span className="no-print">{belgium.tax}</span>
+            <span className="no-print">{tax}</span>
           </label>
           <input
             value={this.state.tax}
@@ -219,7 +215,7 @@ class Belgium extends Component {
           <label htmlFor="paymentDay">
             Dzień wypłaty
             <br />
-            <span className="no-print">{belgium.paymentDay}</span>
+            <span className="no-print">{paymentDay}</span>
             <br />
             <span style={{ textDecoration: "underline" }} className="no-print">
               Wypełnić jeśli inny niż ostatni dzień pracy
@@ -283,7 +279,9 @@ class Belgium extends Component {
           />
         </div>
         <div className="input-box-inputs">
-          <label htmlFor="allowanceValue">Wysokość diety za dzień (EUR)</label>
+          <label htmlFor="allowanceValue">
+            Wysokość diety za dzień ({this.props.countryData.belgium.currency})
+          </label>
           <input
             type="number"
             id="allowanceValue"
@@ -306,7 +304,9 @@ class Belgium extends Component {
           />
         </div>
         <div className="input-box-inputs">
-          <label htmlFor="allAllowanceValue">Wartość diet (EUR)</label>
+          <label htmlFor="allAllowanceValue">
+            Wartość diet ({this.props.countryData.belgium.currency})
+          </label>
           <input
             type="number"
             readOnly

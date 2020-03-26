@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 class Germany extends Component {
   state = {
-    allowanceValue: 14.7, // to można edytować
-    monthlyIncomeCost: 111.25, // to można edytować
+    allowanceValue: this.props.countryData.germany.diet,
+    monthlyIncomeCost: this.props.countryData.germany.monthlyIncomeCost,
     income: "",
     holidayIncome: "",
     currencyValue: "",
@@ -141,18 +141,15 @@ class Germany extends Component {
   };
 
   render() {
-    const germany = {
-      income: "Pole nr 3 - Bruttoarbaitslohn (Gesamt-Brutto)",
-      holidayIncome: "Pole nr 20 - Steuefreue…"
-    };
+    const { income, holidayIncome } = this.props.countryData.germany;
 
     return (
       <div className="input-box">
         <div className="input-box-inputs">
           <label htmlFor="income">
-            Przychód brutto (EUR)
+            Przychód brutto ({this.props.countryData.germany.currency})
             <br />
-            <span className="no-print">{germany.income}</span>
+            <span className="no-print">{income}</span>
           </label>
           <input
             value={this.state.income}
@@ -165,9 +162,9 @@ class Germany extends Component {
         </div>
         <div className="input-box-inputs">
           <label htmlFor="holidayIncome">
-            Przychód wakacyjny (EUR)
+            Przychód wakacyjny ({this.props.countryData.germany.currency})
             <br />
-            <span className="no-print">{germany.holidayIncome}</span>
+            <span className="no-print">{holidayIncome}</span>
           </label>
           <input
             value={this.state.holidayIncome}
@@ -249,7 +246,9 @@ class Germany extends Component {
           />
         </div>
         <div className="input-box-inputs">
-          <label htmlFor="allowanceValue">Wysokość diety za dzień (EUR)</label>
+          <label htmlFor="allowanceValue">
+            Wysokość diety za dzień ({this.props.countryData.germany.currency})
+          </label>
           <input
             type="number"
             id="allowanceValue"
@@ -272,7 +271,9 @@ class Germany extends Component {
           />
         </div>
         <div className="input-box-inputs">
-          <label htmlFor="allAllowanceValue">Wartość diet (EUR)</label>
+          <label htmlFor="allAllowanceValue">
+            Wartość diet ({this.props.countryData.germany.currency})
+          </label>
           <input
             readOnly
             type="number"

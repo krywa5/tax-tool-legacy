@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 class France extends Component {
   state = {
-    allowanceValue: 15, // to można edytować
-    monthlyIncomeCost: 111.25, // to można edytować
+    allowanceValue: this.props.countryData.france.diet,
+    monthlyIncomeCost: this.props.countryData.france.monthlyIncomeCost,
     income: "",
     paymentDay: "",
     currencyValue: "",
@@ -153,18 +153,15 @@ class France extends Component {
   };
 
   render() {
-    const france = {
-      income: "Total Brut",
-      paymentDay: "Paye Le"
-    };
+    const { income, paymentDay } = this.props.countryData.france;
 
     return (
       <div className="input-box">
         <div className="input-box-inputs">
           <label htmlFor="income">
-            Przychód brutto (EUR)
+            Przychód brutto ({this.props.countryData.france.currency})
             <br />
-            <span className="no-print">{france.income}</span>
+            <span className="no-print">{income}</span>
           </label>
           <input
             value={this.state.income}
@@ -200,7 +197,7 @@ class France extends Component {
           <label htmlFor="paymentDay">
             Dzień wypłaty
             <br />
-            <span className="no-print">{france.paymentDay}</span>
+            <span className="no-print">{paymentDay}</span>
             <br />
             <span style={{ textDecoration: "underline" }} className="no-print">
               Wypełnić jeśli inny niż ostatni dzień pracy
@@ -264,7 +261,9 @@ class France extends Component {
           />
         </div>
         <div className="input-box-inputs">
-          <label htmlFor="allowanceValue">Wysokość diety za dzień (EUR)</label>
+          <label htmlFor="allowanceValue">
+            Wysokość diety za dzień ({this.props.countryData.france.currency})
+          </label>
           <input
             type="number"
             id="allowanceValue"
@@ -287,7 +286,9 @@ class France extends Component {
           />
         </div>
         <div className="input-box-inputs">
-          <label htmlFor="allAllowanceValue">Wartość diet (EUR)</label>
+          <label htmlFor="allAllowanceValue">
+            Wartość diet ({this.props.countryData.france.currency})
+          </label>
           <input
             readOnly
             type="number"

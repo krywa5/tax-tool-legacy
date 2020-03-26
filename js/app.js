@@ -11,7 +11,47 @@ const body = document.querySelector("body");
 class App extends Component {
   state = {
     country: "",
-    isCountryChosen: false
+    isCountryChosen: false,
+    countryData: {
+      // Stan na 2020 rok
+      netherlands: {
+        // Stawka = (stawka * oprocentowanie)
+        diet: (50 * 0.3).toFixed(2) * 1, // Oprocentowanie 30% całej diety zagranicznej
+        // koszty uzyskania przychodu za granicą
+        monthlyIncomeCost: 111.25, // EURO
+        currency: "EUR",
+        income: "Loon loonbelasting/volksverzekeringen",
+        tax: "Ingehouden loonbelasting/premie volksverz. (loonheffing)"
+      },
+      belgium: {
+        // (stawka * oprocentowanie)
+        diet: (48 * 0.3).toFixed(2) * 1, // Oprocentowanie 30% całej diety zagranicznej
+        // koszty uzyskania przychodu za granicą
+        monthlyIncomeCost: 111.25, // EURO
+        currency: "EUR",
+        income: "Loon loonbelasting/volksverzekeringen",
+        tax: "Ingehouden loonbelasting/premie volksverz. (loonheffing)",
+        paymentDay: "Paye Le" // TODO: sprawdzić czy tak jest
+      },
+      france: {
+        // (stawka * oprocentowanie)
+        diet: (50 * 0.3).toFixed(2) * 1, // Oprocentowanie 30% całej diety zagranicznej
+        // koszty uzyskania przychodu za granicą
+        monthlyIncomeCost: 111.25, // EURO
+        currency: "EUR",
+        income: "Total Brut",
+        paymentDay: "Paye Le"
+      },
+      germany: {
+        // (stawka * oprocentowanie)
+        diet: (49 * 0.3).toFixed(2) * 1, // Oprocentowanie 30% całej diety zagranicznej
+        // koszty uzyskania przychodu za granicą
+        monthlyIncomeCost: 111.25, // EURO
+        currency: "EUR",
+        income: "Pole nr 3 - Bruttoarbaitslohn (Gesamt-Brutto)",
+        holidayIncome: "Pole nr 20 - Steuefreue…"
+      }
+    }
   };
 
   handleCountryChoice = country => {
@@ -50,7 +90,10 @@ class App extends Component {
           <Header />
           <Country onClick={this.handleCountryChoice} />
           {this.state.isCountryChosen && (
-            <Main countryData={this.state.country} />
+            <Main
+              country={this.state.country}
+              countryData={this.state.countryData}
+            />
           )}
         </div>
         <Footer />
