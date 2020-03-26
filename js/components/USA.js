@@ -9,6 +9,7 @@ class USA extends Component {
     income: "",
     currencyValue: "",
     currencyValueDate: "",
+    currencyValueDateAPI: "",
     currencyTable: "",
     date: "",
     overall: 0,
@@ -18,7 +19,7 @@ class USA extends Component {
   inputHandler = e => {
     if (e.target.value) {
       this.setState({
-        [e.target.name]: +e.target.value
+        [e.target.name]: +e.target.value.replace(",", ".")
       });
     } else {
       this.setState({
@@ -90,6 +91,7 @@ class USA extends Component {
         this.setState({
           currencyValue: data.rates[0].mid.toFixed(4),
           currencyValueDate: data.rates[0].effectiveDate,
+          currencyValueDateAPI: data.rates[0].effectiveDate,
           currencyTable: data.rates[0].no
         })
       )
@@ -195,10 +197,11 @@ class USA extends Component {
           <input
             type="date"
             id="date"
-            value={this.state.date}
+            // value={this.state.date}
             name="date"
-            onChange={this.dateInputHandler}
-            onKeyPress={this.handleSubmit}
+            onBlur={this.dateInputHandler}
+            // onChange={this.dateInputHandler}
+            // onKeyPress={this.handleSubmit}
             max={new Date().toISOString().slice(0, 10)}
           />
         </div>
@@ -215,7 +218,7 @@ class USA extends Component {
             <br />
             {this.state.currencyValueDate && (
               <span style={{ fontSize: "12px" }}>{`(${this.changeFormateDate(
-                this.state.currencyValueDate
+                this.state.currencyValueDateAPI
               )}, ${this.state.currencyTable})`}</span>
             )}
           </label>

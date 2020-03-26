@@ -21,7 +21,7 @@ class Belgium extends Component {
   inputHandler = e => {
     if (e.target.value) {
       this.setState({
-        [e.target.name]: +e.target.value
+        [e.target.name]: +e.target.value.replace(",", ".")
       });
     } else {
       this.setState({
