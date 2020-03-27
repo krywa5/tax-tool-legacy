@@ -18,17 +18,17 @@ footer {
   bottom: 50px;
   right: 50px;
   font-size: 26px;
-  text-transform: uppercase;
-  color: #fff;
-  padding: 20px 50px;
+  padding: 20px 27px;
   border-radius: $border-radius;
   background-color: darken($primary-color, 30%);
   box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.6);
   transition: 0.3s;
   border: 0;
-  letter-spacing: 0.3px;
   cursor: pointer;
   outline: none;
+  // text-transform: uppercase;
+  // color: #fff;
+  // letter-spacing: 0.3px;
 
   &:hover {
     bottom: 52px;
@@ -36,6 +36,11 @@ footer {
     &::after {
       opacity: 1;
     }
+  }
+
+  img {
+    width: 50px;
+    height: auto;
   }
 
   &::after {

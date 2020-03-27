@@ -316,7 +316,7 @@ class USA extends Component {
                       maximumFractionDigits: 2
                     })
                     .replace(".", ",")}{" "}
-                  {this.props.countryData.usa.currency}
+                  &nbsp;{this.props.countryData.usa.currency}
                 </th>
                 <th>
                   {(Math.round(overallIncomePLN * 100) / 100)
@@ -324,8 +324,8 @@ class USA extends Component {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2
                     })
-                    .replace(".", ",")}{" "}
-                  PLN
+                    .replace(".", ",")}
+                  &nbsp;PLN
                 </th>
                 <th className="no-print"></th>
               </tr>

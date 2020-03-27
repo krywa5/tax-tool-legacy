@@ -277,7 +277,7 @@ body.country-active .country-bar {
 }
 
 .income-list {
-  padding: 15px;
+  padding: 30px 15px;
 }
 
 .income-list .list-title {
@@ -347,9 +347,7 @@ footer strong:hover {
   bottom: 50px;
   right: 50px;
   font-size: 26px;
-  text-transform: uppercase;
-  color: #fff;
-  padding: 20px 50px;
+  padding: 20px 27px;
   border-radius: 10px;
   background-color: #0355ce;
   -webkit-box-shadow: 0 7px 8px -5px rgba(0, 0, 0, 0.6);
@@ -357,7 +355,6 @@ footer strong:hover {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   border: 0;
-  letter-spacing: 0.3px;
   cursor: pointer;
   outline: none;
 }
@@ -368,6 +365,11 @@ footer strong:hover {
 
 .print-btn:hover::after {
   opacity: 1;
+}
+
+.print-btn img {
+  width: 50px;
+  height: auto;
 }
 
 .print-btn::after {

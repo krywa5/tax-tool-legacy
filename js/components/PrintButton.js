@@ -1,4 +1,7 @@
 import React from "react";
+import printerLogo from "../../images/printer.png";
+
+console.log(printerLogo);
 
 const PrintButton = props => {
   return (
@@ -8,7 +11,7 @@ const PrintButton = props => {
         window.print();
       }}
     >
-      Wydrukuj
+      <img src={printerLogo} alt="Drukuj" title="Drukuj" />
     </button>
   );
 };
