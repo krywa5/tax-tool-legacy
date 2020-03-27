@@ -12,6 +12,10 @@ html {
   color: #000;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0.6))), url(../images/storm-4805037_1920.jpg);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../images/storm-4805037_1920.jpg);
@@ -37,10 +41,29 @@ body {
   margin: 0 auto;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+  overflow: hidden;
 }
 
 .wide .wrapper {
-  max-width: 800px;
+  max-width: 1100px;
+}
+
+.add-income-btn {
+  padding: 15px 30px;
+  background-color: #facc00;
+  text-transform: uppercase;
+  font-size: 24px;
+  border: 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
+}
+
+.add-income-btn:hover {
+  background-color: #c7a200;
 }
 
 .add-income-btn:disabled {
@@ -191,24 +214,6 @@ body.country-active .country-bar {
   letter-spacing: 2px;
 }
 
-.input-box .add-income-btn {
-  padding: 15px 30px;
-  background-color: #facc00;
-  text-transform: uppercase;
-  font-size: 24px;
-  border: 0;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  cursor: pointer;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  outline: none;
-}
-
-.input-box .add-income-btn:hover {
-  background-color: #c7a200;
-}
-
 .input-box-inputs {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -219,7 +224,7 @@ body.country-active .country-bar {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 15px;
+  padding: 15px 5%;
   border-bottom: 1px solid black;
   font-size: 20px;
 }
@@ -231,7 +236,7 @@ body.country-active .country-bar {
 .input-box-inputs input {
   margin-left: 10px;
   font-size: 22px;
-  width: 150px;
+  width: 200px;
   height: 50px;
   text-align: right;
   padding: 0 3px;
@@ -255,7 +260,7 @@ body.country-active .country-bar {
 
 .input-box .results span {
   font-size: 12px;
-  color: red;
+  color: #444;
 }
 
 .input-box .results input {
@@ -275,11 +280,12 @@ body.country-active .country-bar {
   padding: 15px;
 }
 
-.income-list > span {
+.income-list .list-title {
   text-align: center;
   display: block;
   font-size: 20px;
   margin-bottom: 30px;
+  font-weight: bold;
 }
 
 .income-list table {
@@ -400,5 +406,24 @@ body.country-active .print-btn {
   }
   body {
     background-image: unset;
+    min-height: unset;
+  }
+  .input-box,
+  .country-bar label {
+    display: none;
+  }
+  .income-list {
+    font-size: 10px;
+    background-color: #fff;
+  }
+  .income-list tfoot th:nth-last-child(2),
+  .income-list tfoot th:nth-last-child(3) {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .wrapper {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    border: 1px solid #000;
   }
 }

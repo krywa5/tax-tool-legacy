@@ -15,5 +15,29 @@
 
   body {
     background-image: unset;
+    min-height: unset;
+  }
+
+  .input-box,
+  .country-bar label {
+    display: none;
+  }
+
+  .income-list {
+    font-size: 10px;
+    background-color: #fff;
+
+    tfoot {
+      th:nth-last-child(2),
+      th:nth-last-child(3) {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .wrapper {
+    box-shadow: none;
+    border: 1px solid #000;
   }
 }

@@ -1,0 +1,1 @@
+Przenieść wszystkie state'y do 1 globalnego w app.js lub Main.js

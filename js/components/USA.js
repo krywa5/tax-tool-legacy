@@ -179,7 +179,9 @@ class USA extends Component {
     return (
       <div className="input-box">
         <div className="input-box-inputs no-print">
-          <label htmlFor="income">Przychód (USD)</label>
+          <label htmlFor="income">
+            Przychód {this.props.countryData.usa.currency}
+          </label>
           <input
             value={this.state.income}
             name="income"
@@ -264,7 +266,7 @@ class USA extends Component {
                 <th>Data wpłaty</th>
                 <th>Tabela</th>
                 <th>Kurs waluty</th>
-                <th>Przychód USD</th>
+                <th>Przychód {this.props.countryData.usa.currency}</th>
                 <th>Przychód PLN</th>
                 <th className="no-print"></th>
               </tr>
@@ -284,7 +286,7 @@ class USA extends Component {
 
                 return (
                   <tr data-id={el.id} key={i}>
-                    <td>{i + 1}</td>
+                    <td>{i + 1}.</td>
                     <td>{el.date}</td>
                     <td>{el.table}</td>
                     <td>{el.currencyValue.replace(".", ",")}</td>
@@ -308,15 +310,21 @@ class USA extends Component {
                 <th></th>
                 <th>Łącznie</th>
                 <th>
-                  {String(
-                    (Math.round(overallIncomeUSD * 100) / 100).toFixed(2)
-                  ).replace(".", ",")}{" "}
-                  USD
+                  {(Math.round(overallIncomeUSD * 100) / 100)
+                    .toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })
+                    .replace(".", ",")}{" "}
+                  {this.props.countryData.usa.currency}
                 </th>
                 <th>
-                  {String(
-                    (Math.round(overallIncomePLN * 100) / 100).toFixed(2)
-                  ).replace(".", ",")}{" "}
+                  {(Math.round(overallIncomePLN * 100) / 100)
+                    .toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })
+                    .replace(".", ",")}{" "}
                   PLN
                 </th>
                 <th className="no-print"></th>

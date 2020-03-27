@@ -50,6 +50,9 @@ class App extends Component {
         currency: "EUR",
         income: "Pole nr 3 - Bruttoarbaitslohn (Gesamt-Brutto)",
         holidayIncome: "Pole nr 20 - Steuefreue…"
+      },
+      usa: {
+        currency: "USD"
       }
     }
   };
@@ -72,14 +75,14 @@ class App extends Component {
   componentDidUpdate() {
     if (this.state.isCountryChosen) {
       body.classList.add("country-active");
-      if (this.state.country === "usa") {
-        body.classList.add("wide");
-      } else {
-        body.classList.remove("wide");
-      }
+      // if (this.state.country === "usa") {
+      body.classList.add("wide");
+      // } else {
+      // }
     } else {
+      body.classList.remove("wide");
       body.classList.remove("country-active");
-      body.classList.remove("usa");
+      // body.classList.remove("usa");
     }
   }
 
