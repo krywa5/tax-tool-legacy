@@ -1,0 +1,59 @@
+.tips {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  border-radius: 0 $border-radius $border-radius 0;
+  background-color: $secondary-color;
+  width: 350px;
+  padding: 20px 35px 35px;
+  transition: 0.5s ease-in-out;
+
+  &.active {
+    transform: translate(0, -50%);
+
+    .tips__show-tips {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  &__show-tips {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    background: $secondary-color;
+    transform: rotate(270deg) translateX(-50%);
+    text-align: center;
+    padding: 15px 25px;
+    transform-origin: top left;
+    border-radius: 0 0 $border-radius $border-radius;
+    font-size: 20px;
+    opacity: 1;
+    visibility: visible;
+    cursor: pointer;
+    transition: 0.5s 0.2s ease-in-out;
+  }
+
+  &__close {
+    width: 25px;
+    height: auto;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  &__item {
+    line-height: 1.3;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}

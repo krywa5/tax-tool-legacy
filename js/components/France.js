@@ -16,7 +16,8 @@ class France extends Component {
     workMonths: "",
     startDate: "",
     endDate: "",
-    daysInPoland: 0
+    daysInPoland: 0,
+    tips: []
   };
 
   inputHandler = e => {
