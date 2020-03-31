@@ -13,7 +13,10 @@ class Netherlands extends Component {
     allowanceValue: this.props.countryData.netherlands.diet,
     monthlyIncomeCost: this.props.countryData.netherlands.monthlyIncomeCost,
     income: "",
-    tax: "",
+    tax: 0,
+    incomes: [],
+    overall: 0,
+    overallTax: 0,
     currencyValue: "",
     currencyValueDate: "",
     currencyValueDateAPI: "",
@@ -167,12 +170,86 @@ class Netherlands extends Component {
     });
   };
 
+  clearIncome = () => {
+    this.setState({
+      income: "",
+      tax: "",
+      currencyValue: "",
+      currencyValueDate: "",
+      currencyValueDateAPI: "",
+      currencyTable: "",
+      workDays: "",
+      workMonths: "",
+      startDate: "",
+      endDate: "",
+      daysInPoland: 0
+    });
+    this.income.focus();
+  };
+
+  addToIncomeList = e => {
+    // wróć jeśli nie ma przychodu i kursu waluty
+    if (this.state.income === "" || this.state.currencyValueDateAPI === "") {
+      return;
+    }
+
+    const newIncome = {
+      id: Date.now(),
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+      tax: (this.state.tax * this.state.currencyValue).toFixed(2) * 1,
+      daysInPoland: this.state.daysInPoland,
+      table: this.state.currencyTable,
+      currencyValue: this.state.currencyValue,
+      incomeAbroad: this.state.income,
+      incomePLN: (
+        (this.state.income - this.state.workDays * this.state.allowanceValue) *
+          this.state.currencyValue -
+        this.state.workMonths * this.state.monthlyIncomeCost
+      ).toFixed(2),
+      overall:
+        this.state.overall + this.state.income * this.state.currencyValue,
+      overallTax:
+        this.state.overallTax +
+        (this.state.tax * this.state.currencyValue).toFixed(2) * 1
+    };
+
+    this.setState(prevState => ({
+      incomes: [...prevState.incomes, newIncome],
+      overall: newIncome.overall,
+      overallTax: newIncome.overallTax
+    }));
+
+    this.clearIncome();
+  };
+
+  handleDeleteBtn = e => {
+    const incomes = [...this.state.incomes];
+    const incomeID = e.target.parentElement.parentElement.dataset.id;
+    const output = [];
+
+    incomes.forEach((el, i) => {
+      if (el.id != incomeID) {
+        output.push(el);
+      }
+    });
+
+    this.setState({
+      incomes: output
+    });
+  };
+
   render() {
-    const { income, tax } = this.props.countryData.netherlands;
+    const { income, currency, tax } = this.props.countryData.netherlands;
+
+    let overallIncomePLN = 0;
+    let overallIncomeAbroad = 0;
 
     return (
       <>
-        <div className={`tips ${this.state.isTipsActive ? "active" : ""}`}>
+        <div
+          className={`tips no-print ${this.state.isTipsActive ? "active" : ""}`}
+        >
           <div className="tips__show-tips" onClick={this.showTips.bind(this)}>
             <FontAwesomeIcon icon={faInfo} />
           </div>
@@ -207,6 +284,9 @@ class Netherlands extends Component {
               type="number"
               id="income"
               min="0"
+              ref={input => {
+                this.income = input;
+              }}
             />
           </div>
           <div className="input-box-inputs">
@@ -393,6 +473,111 @@ class Netherlands extends Component {
               Sprawdzić ulgę abolicyjną!
             </span>
           </div>
+        </div>
+        <button
+          className="add-income-btn no-print"
+          onClick={this.addToIncomeList}
+          disabled={
+            this.state.income && this.state.currencyValue ? false : true
+          }
+        >
+          Dodaj pozycję
+        </button>
+        <div className="income-list">
+          <span className="list-title">Lista przychodów</span>
+          <table>
+            <thead>
+              <tr>
+                <th>Lp.</th>
+                <th>Data rozpoczęcia</th>
+                <th>Data zakończenia</th>
+                <th>Ilość dni w Polsce</th>
+                <th>Tabela</th>
+                <th>Kurs waluty</th>
+                <th>Przychód {currency}</th>
+                <th>Podatek PLN</th>
+                <th>Przychód PLN</th>
+                <th className="no-print"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.incomes.map((el, i) => {
+                const incomeAbroad = String(
+                  (Math.round(el.incomeAbroad * 100) / 100).toFixed(2)
+                ).replace(".", ",");
+
+                const incomePLN = String(
+                  (Math.round(el.incomePLN * 100) / 100).toFixed(2)
+                ).replace(".", ",");
+
+                const taxAbroad = String(
+                  (Math.round(el.tax * 100) / 100).toFixed(2)
+                ).replace(".", ",");
+
+                overallIncomePLN += el.incomePLN * 1;
+                overallIncomeAbroad += el.incomeAbroad * 1;
+
+                return (
+                  <tr data-id={el.id} key={el.id}>
+                    <td>{i + 1}.</td>
+                    <td>{el.startDate}</td>
+                    <td>{el.endDate}</td>
+                    <td>{el.daysInPoland}</td>
+                    <td>{el.table}</td>
+                    <td>{el.currencyValue.replace(".", ",")}</td>
+                    <td>{incomeAbroad}</td>
+                    <td>{taxAbroad}</td>
+                    <td>{incomePLN}</td>
+                    <td className="no-print">
+                      <button
+                        className="delete"
+                        title="Usuń"
+                        onClick={this.handleDeleteBtn}
+                      ></button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Łącznie</th>
+                <th>
+                  {(Math.round(overallIncomeAbroad * 100) / 100)
+                    .toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })
+                    .replace(".", ",")}
+                  &nbsp;{currency}
+                </th>
+                <th>
+                  {this.state.overallTax
+                    .toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })
+                    .replace(".", ",")}
+                  &nbsp;PLN
+                </th>
+                <th>
+                  {(Math.round(overallIncomePLN * 100) / 100)
+                    .toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })
+                    .replace(".", ",")}
+                  &nbsp;PLN
+                </th>
+                <th className="no-print"></th>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </>
     );

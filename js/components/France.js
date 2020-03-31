@@ -17,7 +17,8 @@ class France extends Component {
     startDate: "",
     endDate: "",
     daysInPoland: 0,
-    tips: []
+    tips: [],
+    isTipsActive: false
   };
 
   inputHandler = e => {
@@ -407,6 +408,7 @@ class France extends Component {
             />
           </div>
         </div>
+        {/* INCOME LIST FEATURE BELOW */}
         <button
           className="add-income-btn no-print"
           onClick={this.addToIncomeList}
