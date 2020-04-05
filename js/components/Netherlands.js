@@ -6,8 +6,6 @@ import closeIcon from "../../images/close.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 
-// Font Awesome../../node_modules/
-
 class Netherlands extends Component {
   state = {
     allowanceValue: this.props.countryData.netherlands.diet,
@@ -15,8 +13,6 @@ class Netherlands extends Component {
     income: "",
     tax: 0,
     incomes: [],
-    overall: 0,
-    overallTax: 0,
     currencyValue: "",
     currencyValueDate: "",
     currencyValueDateAPI: "",
@@ -27,30 +23,30 @@ class Netherlands extends Component {
     endDate: "",
     daysInPoland: 0,
     tips: [
-      "gdy L02 (zwolnienie lekarskie) -> zredukować wartość diet do 0 (ustawić stawkę 0)"
+      "gdy L02 (zwolnienie lekarskie) -> zredukować wartość diet do 0 (ustawić stawkę 0)",
     ],
-    isTipsActive: false
+    isTipsActive: false,
   };
 
-  inputHandler = e => {
+  inputHandler = (e) => {
     if (e.target.value) {
       this.setState({
-        [e.target.name]: +e.target.value.replace(",", ".")
+        [e.target.name]: +e.target.value.replace(",", "."),
       });
     } else {
       this.setState({
-        [e.target.name]: ""
+        [e.target.name]: "",
       });
     }
   };
 
-  dateInputHandler = e => {
+  dateInputHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  checkWeekend = date => {
+  checkWeekend = (date) => {
     let output = false;
     let newDate = new Date(date);
     newDate.setDate(newDate.getDate() - 1);
@@ -76,16 +72,16 @@ class Netherlands extends Component {
   getCurrencyValue() {
     const API_URL = `http://api.nbp.pl/api/exchangerates/rates/a/eur/${this.state.currencyValueDate}/?format=json`;
     fetch(API_URL)
-      .then(response => response.json())
-      .then(data =>
+      .then((response) => response.json())
+      .then((data) =>
         this.setState({
           currencyValue: data.rates[0].mid.toFixed(4),
           currencyValueDate: data.rates[0].effectiveDate,
           currencyValueDateAPI: data.rates[0].effectiveDate,
-          currencyTable: data.rates[0].no
+          currencyTable: data.rates[0].no,
         })
       )
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         alert(
           "Wystąpił błąd w pobieraniu kursu waluty. Prawdopodobnie wprowadzona data jest z przyszłości albo nie masz internetu. Jeśli ani to ani to, to daj znać Krystianowi :)"
@@ -110,7 +106,7 @@ class Netherlands extends Component {
           this.state.daysInPoland
         ),
         currencyValueDate: this.checkWeekend(this.state.endDate),
-        workMonths: this.calculateWorkDays()
+        workMonths: this.calculateWorkDays(),
       });
     }
     if (
@@ -118,7 +114,7 @@ class Netherlands extends Component {
       this.state.currencyValueDate !== ""
     ) {
       this.setState({
-        currencyValue: this.getCurrencyValue()
+        currencyValue: this.getCurrencyValue(),
       });
     }
   }
@@ -131,16 +127,12 @@ class Netherlands extends Component {
   };
 
   changeFormateDate(oldDate) {
-    return oldDate
-      .toString()
-      .split("-")
-      .reverse()
-      .join("-");
+    return oldDate.toString().split("-").reverse().join("-");
   }
 
-  currencyValueChangeHandler = e => {
+  currencyValueChangeHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -157,16 +149,15 @@ class Netherlands extends Component {
 
   showTips(e) {
     e.target.parentElement.classList.add("active");
-    console.log(this);
     this.setState({
-      isTipsActive: true
+      isTipsActive: true,
     });
   }
 
-  hideTip = e => {
+  hideTip = (e) => {
     e.target.parentElement.classList.remove("active");
     this.setState({
-      isTipsActive: false
+      isTipsActive: false,
     });
   };
 
@@ -182,12 +173,12 @@ class Netherlands extends Component {
       workMonths: "",
       startDate: "",
       endDate: "",
-      daysInPoland: 0
+      daysInPoland: 0,
     });
     this.income.focus();
   };
 
-  addToIncomeList = e => {
+  addToIncomeList = (e) => {
     // wróć jeśli nie ma przychodu i kursu waluty
     if (this.state.income === "" || this.state.currencyValueDateAPI === "") {
       return;
@@ -207,23 +198,16 @@ class Netherlands extends Component {
           this.state.currencyValue -
         this.state.workMonths * this.state.monthlyIncomeCost
       ).toFixed(2),
-      overall:
-        this.state.overall + this.state.income * this.state.currencyValue,
-      overallTax:
-        this.state.overallTax +
-        (this.state.tax * this.state.currencyValue).toFixed(2) * 1
     };
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       incomes: [...prevState.incomes, newIncome],
-      overall: newIncome.overall,
-      overallTax: newIncome.overallTax
     }));
 
     this.clearIncome();
   };
 
-  handleDeleteBtn = e => {
+  handleDeleteBtn = (e) => {
     const incomes = [...this.state.incomes];
     const incomeID = e.target.parentElement.parentElement.dataset.id;
     const output = [];
@@ -235,7 +219,7 @@ class Netherlands extends Component {
     });
 
     this.setState({
-      incomes: output
+      incomes: output,
     });
   };
 
@@ -244,6 +228,7 @@ class Netherlands extends Component {
 
     let overallIncomePLN = 0;
     let overallIncomeAbroad = 0;
+    let overallTaxPLN = 0;
 
     return (
       <>
@@ -284,7 +269,7 @@ class Netherlands extends Component {
               type="number"
               id="income"
               min="0"
-              ref={input => {
+              ref={(input) => {
                 this.income = input;
               }}
             />
@@ -516,6 +501,7 @@ class Netherlands extends Component {
 
                 overallIncomePLN += el.incomePLN * 1;
                 overallIncomeAbroad += el.incomeAbroad * 1;
+                overallTaxPLN += el.tax * 1;
 
                 return (
                   <tr data-id={el.id} key={el.id}>
@@ -551,25 +537,31 @@ class Netherlands extends Component {
                   {(Math.round(overallIncomeAbroad * 100) / 100)
                     .toLocaleString(undefined, {
                       minimumFractionDigits: 2,
-                      maximumFractionDigits: 2
+                      maximumFractionDigits: 2,
                     })
                     .replace(".", ",")}
                   &nbsp;{currency}
                 </th>
-                <th>
-                  {this.state.overallTax
+                <th
+                  className="overallTaxPLN"
+                  onClick={this.props.copyToClipboard}
+                >
+                  {(Math.round(overallTaxPLN * 100) / 100)
                     .toLocaleString(undefined, {
                       minimumFractionDigits: 2,
-                      maximumFractionDigits: 2
+                      maximumFractionDigits: 2,
                     })
                     .replace(".", ",")}
                   &nbsp;PLN
                 </th>
-                <th>
+                <th
+                  className="overallIncomePLN"
+                  onClick={this.props.copyToClipboard}
+                >
                   {(Math.round(overallIncomePLN * 100) / 100)
                     .toLocaleString(undefined, {
                       minimumFractionDigits: 2,
-                      maximumFractionDigits: 2
+                      maximumFractionDigits: 2,
                     })
                     .replace(".", ",")}
                   &nbsp;PLN

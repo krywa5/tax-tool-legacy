@@ -36,7 +36,8 @@
     }
 
     tfoot th {
-      padding-top: 15px;
+      padding-top: 10px;
+      padding-bottom: 10px;
 
       &:last-child,
       &:nth-last-child(2),
@@ -47,6 +48,13 @@
       }
       &:nth-last-child(4) {
         text-align: center;
+      }
+
+      &.overallIncomePLN,
+      &.overallTaxPLN {
+        background-color: $secondary-color;
+        border: 2px solid #000;
+        cursor: pointer;
       }
     }
   }

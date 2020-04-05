@@ -1,9 +1,7 @@
 import React from "react";
 import printerLogo from "../../images/printer.png";
 
-console.log(printerLogo);
-
-const PrintButton = props => {
+const PrintButton = (props) => {
   return (
     <button
       className="no-print print-btn"

@@ -6,7 +6,6 @@ class France extends Component {
     monthlyIncomeCost: this.props.countryData.france.monthlyIncomeCost,
     income: "",
     incomes: [],
-    overall: 0,
     paymentDay: "",
     currencyValue: "",
     currencyValueDate: "",
@@ -18,28 +17,28 @@ class France extends Component {
     endDate: "",
     daysInPoland: 0,
     tips: [],
-    isTipsActive: false
+    isTipsActive: false,
   };
 
-  inputHandler = e => {
+  inputHandler = (e) => {
     if (e.target.value) {
       this.setState({
-        [e.target.name]: +e.target.value.replace(",", ".")
+        [e.target.name]: +e.target.value.replace(",", "."),
       });
     } else {
       this.setState({
-        [e.target.name]: ""
+        [e.target.name]: "",
       });
     }
   };
 
-  dateInputHandler = e => {
+  dateInputHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  checkWeekend = date => {
+  checkWeekend = (date) => {
     let output = false;
     let newDate = new Date(date);
 
@@ -65,16 +64,16 @@ class France extends Component {
   getCurrencyValue() {
     const API_URL = `http://api.nbp.pl/api/exchangerates/rates/a/eur/${this.state.currencyValueDate}/?format=json`;
     fetch(API_URL)
-      .then(response => response.json())
-      .then(data =>
+      .then((response) => response.json())
+      .then((data) =>
         this.setState({
           currencyValue: data.rates[0].mid.toFixed(4),
           currencyValueDate: data.rates[0].effectiveDate,
           currencyValueDateAPI: data.rates[0].effectiveDate,
-          currencyTable: data.rates[0].no
+          currencyTable: data.rates[0].no,
         })
       )
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         alert(
           "Wystąpił błąd w pobieraniu kursu waluty. Prawdopodobnie wprowadzona data jest z przyszłości albo nie masz internetu. Jeśli ani to ani to, to daj znać Krystianowi :)"
@@ -111,7 +110,7 @@ class France extends Component {
           this.state.paymentDay === ""
             ? this.checkWeekend(this.state.endDate)
             : this.checkWeekend(this.state.paymentDay),
-        workMonths: this.calculateWorkDays()
+        workMonths: this.calculateWorkDays(),
       });
     }
     if (
@@ -119,7 +118,7 @@ class France extends Component {
       this.state.currencyValueDate !== ""
     ) {
       this.setState({
-        currencyValue: this.getCurrencyValue()
+        currencyValue: this.getCurrencyValue(),
       });
     }
   }
@@ -132,16 +131,12 @@ class France extends Component {
   };
 
   changeFormateDate(oldDate) {
-    return oldDate
-      .toString()
-      .split("-")
-      .reverse()
-      .join("-");
+    return oldDate.toString().split("-").reverse().join("-");
   }
 
-  currencyValueChangeHandler = e => {
+  currencyValueChangeHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -167,12 +162,12 @@ class France extends Component {
       workMonths: "",
       startDate: "",
       endDate: "",
-      daysInPoland: 0
+      daysInPoland: 0,
     });
     this.income.focus();
   };
 
-  addToIncomeList = e => {
+  addToIncomeList = (e) => {
     // wróć jeśli nie ma przychodu i kursu waluty
     if (this.state.income === "" || this.state.currencyValueDateAPI === "") {
       return;
@@ -194,18 +189,17 @@ class France extends Component {
           this.state.currencyValue -
         this.state.workMonths * this.state.monthlyIncomeCost
       ).toFixed(2),
-      overall: this.state.overall + this.state.income * this.state.currencyValue
     };
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       incomes: [...prevState.incomes, newIncome],
-      overall: newIncome.overall
+      overall: newIncome.overall,
     }));
 
     this.clearIncome();
   };
 
-  handleDeleteBtn = e => {
+  handleDeleteBtn = (e) => {
     const incomes = [...this.state.incomes];
     const incomeID = e.target.parentElement.parentElement.dataset.id;
     const output = [];
@@ -217,7 +211,7 @@ class France extends Component {
     });
 
     this.setState({
-      incomes: output
+      incomes: output,
     });
   };
 
@@ -244,7 +238,7 @@ class France extends Component {
               id="income"
               min="0"
               min="0"
-              ref={input => {
+              ref={(input) => {
                 this.income = input;
               }}
             />
@@ -387,7 +381,7 @@ class France extends Component {
               <span className="no-print">
                 <strong>PIT-ZG pole nr 8</strong>
                 <br />
-                PIT-ZG pole nr 9,10 = 0, sprawdzić pole nr 199
+                PIT-ZG pole nr 9,10 = 0, sprawdzić pole nr 222
               </span>
             </label>
             <input
@@ -483,16 +477,19 @@ class France extends Component {
                   {(Math.round(overallIncomeAbroad * 100) / 100)
                     .toLocaleString(undefined, {
                       minimumFractionDigits: 2,
-                      maximumFractionDigits: 2
+                      maximumFractionDigits: 2,
                     })
                     .replace(".", ",")}
                   &nbsp;{currency}
                 </th>
-                <th>
+                <th
+                  className="overallIncomePLN"
+                  onClick={this.props.copyToClipboard}
+                >
                   {(Math.round(overallIncomePLN * 100) / 100)
                     .toLocaleString(undefined, {
                       minimumFractionDigits: 2,
-                      maximumFractionDigits: 2
+                      maximumFractionDigits: 2,
                     })
                     .replace(".", ",")}
                   &nbsp;PLN

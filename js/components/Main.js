@@ -6,15 +6,22 @@ import Netherlands from "./Netherlands";
 import France from "./France";
 import USA from "./USA";
 
-const Main = props => {
-  const copyToClipboard = e => {
-    const text = e.target.value.replace(".", ",");
+const Main = (props) => {
+  const copyToClipboard = (e) => {
+    let text = "";
+
+    // jeśli target jest <th> to bierzemy jego innerText a nie value
+    if (e.target.matches("th")) {
+      text = e.target.innerText.replace(".", ",").slice(0, -4);
+    } else {
+      text = e.target.value.replace(".", ",").replace(" ", "");
+    }
 
     navigator.clipboard.writeText(text).then(
-      function() {
+      function () {
         alert(`Wartość ${text} skopiowano do schowka`);
       },
-      function(err) {
+      function (err) {
         alert("Błąd kopiowania wartości :( przepisz ją ręcznie!");
       }
     );

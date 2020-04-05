@@ -13,6 +13,11 @@
     font-size: inherit;
     padding: 5px 10px;
     cursor: pointer;
+    margin-left: 0;
+  }
+
+  label {
+    margin-right: 50px;
   }
 }
 body.country-active .country-bar {

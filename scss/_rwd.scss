@@ -27,11 +27,19 @@
     font-size: 10px;
     background-color: #fff;
 
-    tfoot {
-      th:nth-last-child(2),
-      th:nth-last-child(3) {
+    table tfoot th {
+      &:nth-last-child(2),
+      &:nth-last-child(3) {
         font-size: 14px;
         font-weight: bold;
+      }
+
+      &.overallIncomePLN,
+      &.overallTaxPLN {
+        background-color: unset;
+        border: 0;
+        border-top: 1px solid #000;
+        cursor: default;
       }
     }
   }

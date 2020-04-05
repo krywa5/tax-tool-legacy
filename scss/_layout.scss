@@ -27,7 +27,7 @@ body {
   overflow: hidden;
 }
 .wide .wrapper {
-  max-width: 1100px;
+  max-width: 1140px;
 }
 
 .add-income-btn {
@@ -103,7 +103,7 @@ button.delete {
   &:after {
     content: "-";
     position: absolute;
-    top: -13px;
+    top: -12px;
     left: 2px;
     color: inherit;
     font-family: arial, sans-serif;
