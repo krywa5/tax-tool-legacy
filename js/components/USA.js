@@ -150,7 +150,13 @@ class USA extends Component {
 
     this.setState(prevState => ({
       incomes: [...prevState.incomes, newIncome],
-      overall: newIncome.overall
+      overall: newIncome.overall,
+      income: "",
+      currencyValue: "",
+      currencyValueDate: "",
+      currencyValueDateAPI: "",
+      currencyTable: "",
+      date: "",
     }));
 
     this.clearIncome();
