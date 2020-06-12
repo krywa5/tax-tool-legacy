@@ -488,7 +488,7 @@ body.country-active .print-btn {
     background-image: unset;
     min-height: unset;
   }
-  .input-box,
+  .input-box:not(.input-box--print),
   .country-bar label {
     display: none;
   }

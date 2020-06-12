@@ -177,7 +177,7 @@ class USA extends Component {
     let overallIncomeUSD = 0;
 
     return (
-      <div className="input-box">
+      <div className="input-box input-box--print">
         <div className="input-box-inputs no-print">
           <label htmlFor="income">
             Przychód {this.props.countryData.usa.currency}
