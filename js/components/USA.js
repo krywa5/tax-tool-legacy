@@ -150,7 +150,13 @@ class USA extends Component {
 
     this.setState(prevState => ({
       incomes: [...prevState.incomes, newIncome],
-      overall: newIncome.overall
+      overall: newIncome.overall,
+      income: "",
+      currencyValue: "",
+      currencyValueDate: "",
+      currencyValueDateAPI: "",
+      currencyTable: "",
+      date: "",
     }));
 
     this.clearIncome();
@@ -177,7 +183,7 @@ class USA extends Component {
     let overallIncomeUSD = 0;
 
     return (
-      <div className="input-box">
+      <div className="input-box input-box--print">
         <div className="input-box-inputs no-print">
           <label htmlFor="income">
             Przychód {this.props.countryData.usa.currency}
