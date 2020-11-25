@@ -84,7 +84,7 @@ class USA extends Component {
   };
 
   getCurrencyValue() {
-    const API_URL = `http://api.nbp.pl/api/exchangerates/rates/a/usd/${this.state.currencyValueDate}/?format=json`;
+    const API_URL = `https://cors-anywhere.herokuapp.com/http://api.nbp.pl/api/exchangerates/rates/a/usd/${this.state.currencyValueDate}/?format=json`;
     fetch(API_URL)
       .then(response => response.json())
       .then(data =>
