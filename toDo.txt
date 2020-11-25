@@ -1,3 +1,2 @@
 Przenieść wszystkie state'y do 1 globalnego w app.js lub Main.js
-
-dodać funkcjonalność dodawania różnych przychodów do wszystkich krajów
+Usunąć &nbsp; w copyToClipBoard w całościowym przychodzi w incomeList

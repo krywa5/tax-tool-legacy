@@ -1,4 +1,5 @@
 {
+  "homepage": "https://krywa5.github.io/tax-tool/",
   "name": "FE_REACT_React",
   "version": "1.0.0",
   "description": "<img alt=\"Logo\" src=\"https://coderslab.pl/svg/logo-coderslab.svg\" width=\"400\">",
@@ -6,7 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --hot -d",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -18,7 +21,6 @@
   "bugs": {
     "url": "https://github.com/CodersLab-core/FE_REACT_React/issues"
   },
-  "homepage": "https://github.com/CodersLab-core/FE_REACT_React#readme",
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
@@ -27,6 +29,7 @@
     "babel-loader": "^8.0.6",
     "css-loader": "^2.1.1",
     "file-loader": "^6.0.0",
+    "gh-pages": "^3.1.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",

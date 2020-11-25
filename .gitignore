@@ -25,3 +25,5 @@ node_modules/
 
 ### Other ###
 .test/
+toDo.txt
+/build

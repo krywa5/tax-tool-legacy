@@ -75,7 +75,7 @@ class Belgium extends Component {
       .catch((error) => {
         console.log(error);
         alert(
-          "Wystąpił błąd w pobieraniu kursu waluty. Prawdopodobnie wprowadzona data jest z przyszłości albo nie masz internetu. Jeśli ani to ani to, to daj znać Krystianowi :)"
+          "Wystąpił błąd w pobieraniu kursu waluty."
         );
       });
   }
@@ -188,7 +188,7 @@ class Belgium extends Component {
       incomeAbroad: this.state.income,
       incomePLN: (
         (this.state.income - this.state.workDays * this.state.allowanceValue) *
-          this.state.currencyValue -
+        this.state.currencyValue -
         this.state.workMonths * this.state.monthlyIncomeCost
       ).toFixed(2),
     };
@@ -436,11 +436,11 @@ class Belgium extends Component {
               value={
                 this.state.currencyValue
                   ? (
-                      (this.state.income -
-                        this.state.workDays * this.state.allowanceValue) *
-                        this.state.currencyValue -
-                      this.state.workMonths * this.state.monthlyIncomeCost
-                    ).toFixed(2)
+                    (this.state.income -
+                      this.state.workDays * this.state.allowanceValue) *
+                    this.state.currencyValue -
+                    this.state.workMonths * this.state.monthlyIncomeCost
+                  ).toFixed(2)
                   : ""
               }
             />
